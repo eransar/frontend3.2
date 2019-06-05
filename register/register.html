@@ -1,0 +1,27 @@
+
+<div ng-controller="registerController" >
+    <form name="RegisterForm" ng-submit="submit()" novalidate>
+        <br>
+        <input type="text" name="firstName" ng-model="firstName">
+        <span ng-show="RegisterForm.firstName.$error.required">First name is required! </span>
+        <span ng-show="RegisterForm.field.$invalid">Invalid field</span><br><br>
+
+        <input type="text" name="lastName" ng-model="lastName">
+        <span ng-show="RegisterForm.lastName.$error.required">Last name is required! </span>
+        <span ng-show="RegisterForm.lastName.$invalid">Invalid field</span><br><br>
+        
+        
+
+
+        <input id="username" type="text" name="username" ng-model="username" required ng-minlength="3" required ng-maxlength = "8"  ng-model="user.name">
+        <span ng-show="RegisterForm.username.$error.required">This is required! </span>
+        <span ng-show="RegisterForm.username.$invalid">Invalid field</span><br><br>
+
+        
+
+
+        <input ng-disabled="RegisterForm.$invalid" type="submit" id="submit" value="Submit">
+    </form>
+
+    <p>{{  }}</p>
+</div>

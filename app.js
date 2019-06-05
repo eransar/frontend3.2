@@ -19,6 +19,11 @@ app.config(function($routeProvider)  {
             templateUrl: 'pages/poi/poi.html',
             controller : 'poiController as poiCtrl'
         })
+        // register
+        .when('/register', {
+            templateUrl: 'register/register.html',
+            controller : 'registerController as regCtrl'
+        })
         // other
         .otherwise({ redirectTo: '/' });
 });
