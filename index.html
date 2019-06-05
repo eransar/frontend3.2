@@ -1,6 +1,7 @@
 <html>
     <head>
-        <title>My Website</title>
+
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
     </head>
     <body ng-app="myApp">
         <!-- load angular -->
@@ -11,23 +12,33 @@
         <script src="app.js"></script>
 
         <!-- load controllers -->
-        <script src="pages/about/aboutController.js"></script>
-        <script src="pages/poi/poiController.js"></script>
+        <!--<script src="pages/about/aboutController.js"></script>-->
+        <!--<script src="pages/poi/poiController.js"></script>-->
 
         <!-- the website -->
-        <h1>My Website</h1>
-
         <!-- menu -->
+        <div ng-app="" ng-init="myText='Hello World!'">
+
+            <p ng-bind="myText"></p>
+
+        </div>
         <ul>
             <li>
                 <a href="#!">Home</a>
             </li>
             <li>
+                <a href="#!login">About</a>
+            </li>
+            <li>
                 <a href="#!about">About</a>
             </li>
             <li>
-                <a href="#!poi">POI</a>
+                <a href="#!search">About</a>
             </li>
+            <li>
+                <a href="#!about">About</a>
+            </li>
+
         </ul>
 
         <!-- This section changes as the hashbang changes -->
