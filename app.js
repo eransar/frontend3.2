@@ -1,4 +1,4 @@
-let app = angular.module('myApp', ["ngRoute"]);
+var app = angular.module('myApp', ["ngRoute"]);
 
 // config routes
 app.config(function($routeProvider)  {
@@ -16,8 +16,8 @@ app.config(function($routeProvider)  {
         })
         // poi
         .when('/poi', {
-            templateUrl: 'pages/poi/poi.html',
-            controller : 'poiController as poiCtrl'
+            templateUrl: 'pages/poi/POI_Details.html',
+            controller : 'poiController as POI_DetailsCtrl'
         })
         // register
         .when('/register', {
