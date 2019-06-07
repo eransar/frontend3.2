@@ -22,7 +22,8 @@ app.config(function($routeProvider)  {
         // register
         .when('/register', {
             templateUrl: 'register/register.html',
-            controller : 'registerController as regCtrl'
+            controller : 'registerController as regCtrl',
+            css: 'register/register.css'
         })
         // other
         .otherwise({ redirectTo: '/' });
