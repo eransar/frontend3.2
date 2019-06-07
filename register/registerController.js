@@ -1,6 +1,17 @@
 // poi controller
 angular.module("myApp")
-.controller("registerController", function ($scope) {
+.controller("registerController", function ($scope,$http) {
+        $http({
+                method : "GET",
+                url : "http://localhost:3000/getPoints/The Western Wall"
+              }).then(function mySuccess(response) {
+                console.log(response.data);
+                  $scope.myWelcome = response.data;
+                }, function myError(response) {
+                  $scope.myWelcome = response.statusText;
+              });
+
+
 //         $scope.submit = function(){
 //         var email = function(){
             
