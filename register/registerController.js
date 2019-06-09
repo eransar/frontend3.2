@@ -3,7 +3,7 @@ angular.module("myApp")
 .controller("registerController", function ($scope,$http) {
         $http({
                 method : "GET",
-                url : "http://localhost:3000/getPoints/The Western Wall"
+                url : "http://localhost:3000/register"
               }).then(function mySuccess(response) {
                 console.log(response.data);
                   $scope.myWelcome = response.data;
