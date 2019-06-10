@@ -9,6 +9,11 @@ app.config(function($routeProvider)  {
             controller : 'homeController as homeCtrl',
             css: 'home/home.css'
         })
+        .when('/login', {
+            templateUrl: 'home-login/home_login.html',
+            controller : 'homeLoginController as homeLoginCtrl',
+            css: 'home-login/home_login.css'
+        })
         // about
         .when('/about', {
             // this is a template url
