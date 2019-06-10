@@ -22,9 +22,10 @@ app.config(function($routeProvider)  {
             css: 'about/about.css'
         })
         // poi
-        .when('/poi', {
-            templateUrl: 'pages/poi/poi.html',
-            controller : 'poiController as poiCtrl'
+        .when('/search', {
+            templateUrl: 'search/search.html',
+            controller : 'searchController as searchCtrl',
+            css: 'search/search.css'
         })
         // register
         .when('/register', {
