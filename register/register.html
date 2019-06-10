@@ -1,17 +1,17 @@
 <link rel="stylesheet" type="text/css" href="register/register.css">
+
 <div ng-controller="registerController" class="container" >
     <form name="contactForm" novalidate id="contact" method="POST">
         <br>
         <h1>Register Form</h1><br>
-
-        <input id="user" type="text" placeholder="user" name="user" ng-model="container.user" ng-required = "true" />
+        <input id="user" type="text" placeholder="User" name="user" ng-model="container.user" ng-required = "true" />
         <div ng-show="contactForm.user.$touched && contactForm.user.$invalid" >
             <small style="color: red; display:block;text-align:center">Enter a valid user</small>
         </div><br><br>
 
         <input id="password" type="text" placeholder="password" name="password" ng-model="container.password" ng-required = "true" />
         <div ng-show="contactForm.password.$touched && contactForm.password.$invalid" >
-            <small style="color: red; display:block;text-align:center">Enter a valid user</small>
+            <small style="color: red; display:block;text-align:center">Enter a valid password</small>
         </div><br><br>
 
         <input id="email" type="email" placeholder="Email" name="email" ng-model="container.email" ng-required = "true" />
@@ -19,9 +19,9 @@
             <small style="color: red; display:block;text-align:center">Enter a valid email</small>
         </div><br><br>
 
-        <input id="firstName" type="text" placeholder="firstName" name="name" ng-model="container.firstName" ng-required = "true" /><br><br>
+        <input id="firstName" type="text" placeholder="FirstName" name="name" ng-model="container.firstName" ng-required = "true" /><br><br>
         
-        <input id="lastName" type="text" placeholder="lastName" name="name" ng-model="container.lastName" ng-required = "true" /><br><br>
+        <input id="lastName" type="text" placeholder="LastName" name="name" ng-model="container.lastName" ng-required = "true" /><br><br>
         
         <div class="box">
         <select name="country" id="country" ng-model="container.country" ng-options="item for item in countries.country">
@@ -41,7 +41,7 @@
         </select><br><br>
         </div>
         
-        <input id="answer1" type="text" placeholder="answer" name="answer" ng-model="container.answer1" ng-required = "true" /><br><br>
+        <input id="answer1" type="text" placeholder="Answer" name="answer" ng-model="container.answer1" ng-required = "true" /><br><br>
         
         <div class="box">
         <select name="questions" id="questions2" ng-model="container.questions2" ng-options="c.question for c in questions">
@@ -49,8 +49,13 @@
         </select><br><br>
         </div>
         
-        <input id="answer2" type="text" placeholder="answer" name="answer" ng-model="container.answer2" ng-required = "true" /><br><br>
+        <input id="answer2" type="text" placeholder="Answer" name="answer" ng-model="container.answer2" ng-required = "true" /><br><br>
         
         <input type="submit" id="submit" ng-click="submitClick()" value="register" ng-disabled="contactForm.$invalid"/>
     </form>
+    
 </div>
+
+<!-- <video autoplay muted loop id="myVideo">
+    <source src="re/2019-06-10_02-27-22.mp4" type="video/mp4">
+</video> -->
