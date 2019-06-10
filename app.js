@@ -21,9 +21,10 @@ app.config(function($routeProvider)  {
             controller : 'aboutController as abtCtrl'
         })
         // poi
-        .when('/poi', {
-            templateUrl: 'pages/poi/poi.html',
-            controller : 'poiController as poiCtrl'
+        .when('/search', {
+            templateUrl: 'search/search.html',
+            controller : 'searchController as searchCtrl',
+            css: 'search/search.css'
         })
         // register
         .when('/register', {
