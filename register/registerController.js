@@ -33,10 +33,11 @@ angular.module("myApp")
   $scope.submitClick = function(){
     var securityQuestions = [$scope.container.questions1.question , $scope.container.questions2.question];
     var securityAnswers = [$scope.container.answer1 , $scope.container.answer2];
-    data = {
-      user: $scope.container.user,
+    data1 = {
+      username: $scope.container.user,
       email:$scope.container.email,
       password:$scope.container.password,
+      city:"",
       firstname:$scope.container.firstName,
       lastname:$scope.container.lastName,
       country:$scope.container.country,
@@ -44,7 +45,19 @@ angular.module("myApp")
       securityQuestions:securityQuestions,
       securityAnswers:securityAnswers
     }
-  }
+    console.log(data1);
+    $http({
+                method : "POST",
+                url : "http://localhost:3000/register",
+                data : data1  
+              }).then(function mySuccess(response) {
+                console.log(response.data);
+                  $scope.myWelcome = response.data;
+                }, function myError(response) {
+                  console.log(response.statusText);
+                  $scope.myWelcome = response.statusText;
+              });
+    }
         // $http({
         //         method : "POST",
         //         url : "http://localhost:3000/register"
