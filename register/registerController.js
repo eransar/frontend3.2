@@ -1,6 +1,5 @@
 // poi controller
-angular.module("myApp")
-.controller("registerController", function ($scope,$http) { 
+angular.module("myApp").controller("registerController", function ($scope,$http) { 
   /* categories req */
   $http({
       method : "GET",
@@ -29,8 +28,14 @@ angular.module("myApp")
     }, function myError(response) {
       $scope.myWelcome = response.statusText;
   });
+  
   var data;
   $scope.submitClick = function(){
+    var tmp =[];
+    for (let index = 0; index < ($scope.container.category).length; index++) {
+      tmp.push(($scope.container.category)[index].category);
+    }
+    tmp = JSON.stringify(tmp);
     var securityQuestions = [$scope.container.questions1.question , $scope.container.questions2.question];
     var securityAnswers = [$scope.container.answer1 , $scope.container.answer2];
     data1 = {
@@ -41,11 +46,12 @@ angular.module("myApp")
       firstname:$scope.container.firstName,
       lastname:$scope.container.lastName,
       country:$scope.container.country,
-      categories:$scope.container.category.category,
+      categories:tmp,
       securityQuestions:securityQuestions,
       securityAnswers:securityAnswers
     }
-    console.log(data1);
+    
+    console.log($scope.container.category );
     $http({
                 method : "POST",
                 url : "http://localhost:3000/register",

@@ -30,8 +30,8 @@
         </div>
         
         <div class="box">
-        <select name="category" id="category" ng-model="container.category" ng-options="c.category for c in categories">
-                <option value="">---Please select category---</option> <!-- not selected / blank option -->
+            <span>click control from multiple choice </span>
+        <select name="category" id="category" ng-model="container.category" ng-options="c.category for c in categories" multiple>
         </select><br><br>
         </div>
         
@@ -56,6 +56,3 @@
     
 </div>
 
-<!-- <video autoplay muted loop id="myVideo">
-    <source src="re/2019-06-10_02-27-22.mp4" type="video/mp4">
-</video> -->
