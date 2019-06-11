@@ -1,4 +1,4 @@
 angular.module("myApp")
-.controller("aboutController", function ($scope,$http){
-    
-});
+    .controller('aboutController', function($scope, $rootScope) {
+        
+    });

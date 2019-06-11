@@ -12,9 +12,15 @@ body {
     opacity: 0.6;
  }
 
- #images{
-   margin-right: 40%;
-   margin-left: 40%;
-   width: 50%;
-   height: 60%;
+ .column {
+   float: left;
+   padding: 25px;
  }
+ 
+ /* Clear floats after image containers */
+ .row::after {
+   content: "";
+   clear: both;
+   display: table;
+ }
+
