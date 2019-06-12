@@ -1,6 +1,7 @@
 // poi controller
 angular.module("myApp").controller("registerController", function ($scope,$http) { 
   /* categories req */
+  "use strict";
   $http({
       method : "GET",
       url : "http://localhost:3000/categories"
@@ -23,16 +24,16 @@ angular.module("myApp").controller("registerController", function ($scope,$http)
     method : "GET",
     url : "http://localhost:3000/questions"
   }).then(function mySuccess(response) {
-    console.log(response.data);
+    // console.log(response.data);
     $scope.questions = response.data;
     }, function myError(response) {
       $scope.myWelcome = response.statusText;
   });
   
-  var data;
+  var data1;
   $scope.submitClick = function(){
     var tmp =[];
-    for (let index = 0; index < ($scope.container.category).length; index++) {
+    for (var index = 0; index < ($scope.container.category).length; index++) {
       tmp.push(($scope.container.category)[index].category);
     }
     tmp = JSON.stringify(tmp);
@@ -49,18 +50,18 @@ angular.module("myApp").controller("registerController", function ($scope,$http)
       categories:tmp,
       securityQuestions:securityQuestions,
       securityAnswers:securityAnswers
-    }
+    };
     $http({
             method : "POST",
             url : "http://localhost:3000/register",
             data : data1  
           }).then(function mySuccess(response) {
-            console.log(response.data);
+            // console.log(response.data);
               $scope.myWelcome = response.data;
             }, function myError(response) {
-              console.log(response.statusText);
+              // console.log(response.statusText);
               $scope.myWelcome = response.statusText;
           });
-  }
+  };
 
 });
