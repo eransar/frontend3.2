@@ -1,5 +1,9 @@
 body {
    background-color:eee;
+   background-size: unset;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
   }
 
  #teXtOnUs{

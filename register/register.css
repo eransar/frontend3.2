@@ -5,6 +5,9 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   text-rendering: optimizeLegibility;
+  background-size: unset;
+  font-family: sans-serif;
+
 }
 
 body {
