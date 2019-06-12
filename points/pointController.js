@@ -1,14 +1,14 @@
 angular.module("myApp")
     .controller("pointController", function ($scope,$http) {
-        var users = localStorage.getItem("points");
+        var points = localStorage.getItem("points");
         var flag = true;
         var in1 = true;
-        for (let index = 0; index < users.length; index++) {
+        for (let index = 0; index < points.length; index++) {
             flag = true;
             var node = document.createElement("LI");
             //name
             var name_user = document.createElement("H1");
-            var text = document.createTextNode(users[0]);
+            var text = document.createTextNode(points[0]);
             name_user.appendChild(text);
             node.appendChild(name_user);
             //pic            
@@ -19,7 +19,7 @@ angular.module("myApp")
                     in1 = false;
                     $http({
                         method : "GET",
-                        url : "http://localhost:3000/getChosenPictureByPoint/"+users[0]
+                        url : "http://localhost:3000/getChosenPictureByPoint/"+points[0]
                     }).then(function mySuccess(response) {
                         name_pic = response.data;
                         i.src = "http://127.0.0.1:3000/images/"+name_pic;
