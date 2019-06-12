@@ -1,10 +1,11 @@
-let app = angular.module('myApp', ["ngRoute"]);
+var app = angular.module('myApp', ["ngRoute"]);
 var users_dic = "" ;
 
 
 
 // config routes
 app.config(function($routeProvider)  {
+    "use strict";
     $routeProvider
         // homepage
         .when('/', {
@@ -46,6 +47,7 @@ app.config(function($routeProvider)  {
 });
 
 app.controller("H_controller", function ($http) {
+    "use strict";
     $http({
         method : "GET",
         url : "http://localhost:3000/points"

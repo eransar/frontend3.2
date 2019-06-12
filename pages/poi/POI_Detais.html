@@ -1,0 +1,23 @@
+<!-- css -->
+<style>
+    img {
+        height: 100px;
+    }
+</style>
+<div ng-controller="POI_DetailsCtrl">
+    <h1>{{point.name}}</h1>
+    <h2>Category: {{point.category}}</h2>
+    <img ng-src="point.picture"> </img>
+    <h3 ng-bind="point.description"></h3>
+    <p> Rank: {{point.total_rank}}     Amount View: {{point.views}}   </p>
+
+
+</div>
+<h2>POI</h2>
+
+<!-- display all cities -->
+<li>
+    point name: <span ng-bind="point.name"></span><br>
+    city state: <span ng-bind="point.view"></span><br>
+</li>
+<img ng-src="{{ point.picture }}">
