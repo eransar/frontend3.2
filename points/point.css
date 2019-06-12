@@ -17,20 +17,12 @@ body {
 
 #name_user_h3{
     text-align: center;
-    font-size: 20px;
-}
-
-.name_user_h3{
-    padding: 5%;   
+    font-size: 25px;
+    padding: 5%;
 }
 
 #points_div{
     margin-left: 5%;
-    background-color: black;
-}
-
-
-#main_vid{
     background-color: black;
 }
 
@@ -42,9 +34,4 @@ body {
     float: left;
     margin: 50px;
     background-color:eee;
-
-}
-
-.rank_class{
-    text-align: center;
 }
