@@ -1,23 +1,34 @@
-var app = angular.module('myApp', ["ngRoute"]);
+let app = angular.module('myApp', ["ngRoute"]);
+var users_dic = "" ;
+
+
 
 // config routes
 app.config(function($routeProvider)  {
     $routeProvider
         // homepage
         .when('/', {
-            // this is a template
-            template: '<h1>This is the default route</h1>'
+            templateUrl: 'home/home.html',
+            controller : 'homeController as homeCtrl',
+            css: 'home/home.css'
+        })
+        .when('/login', {
+            templateUrl: 'home-login/home_login.html',
+            controller : 'homeLoginController as homeLoginCtrl',
+            css: 'home-login/home_login.css'
         })
         // about
         .when('/about', {
             // this is a template url
-            templateUrl: 'pages/about/about.html',
-            controller : 'aboutController as abtCtrl'
+            templateUrl: 'about/about.html',
+            controller : 'aboutController as abtCtrl',
+            css: 'about/about.css'
         })
         // poi
-        .when('/poi', {
-            templateUrl: 'pages/poi/POI_Details.html',
-            controller : 'poiController as POI_DetailsCtrl'
+        .when('/search', {
+            templateUrl: 'search/search.html',
+            controller : 'searchController as searchCtrl',
+            css: 'search/search.css'
         })
         // register
         .when('/register', {
@@ -25,6 +36,24 @@ app.config(function($routeProvider)  {
             controller : 'registerController as regCtrl',
             css: 'register/register.css'
         })
+        .when('/points', {
+            templateUrl: 'points/point.html',
+            controller : 'pointController as regCtrl',
+            css: 'points/point.css'
+        })
         // other
         .otherwise({ redirectTo: '/' });
+});
+
+app.controller("H_controller", function ($http) {
+    $http({
+        method : "GET",
+        url : "http://localhost:3000/points"
+      }).then(function mySuccess(response) {
+          users_dic =  response.data;
+          localStorage.setItem('points', JSON.stringify(users_dic));
+        }, function myError(response) {
+          users_dic =  response.statusText;
+    });
+    
 });
