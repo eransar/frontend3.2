@@ -1,6 +1,7 @@
 angular.module("myApp")
     .controller("pointController", function ($scope,$http) {
         // Get the modal
+        $scope.fav_img = "star1.png"
         var tmpCategory = "";
         var modal = document.getElementById("myModal");
         // Get the <span> element that closes the modal
@@ -106,6 +107,20 @@ angular.module("myApp")
               });
               
         }
+
+        $scope.imgStar = function(event){
+            var t = document.getElementById(event.target.id);
+            
+            if($scope.fav_img == "star1.png"){
+                $scope.fav_img = "star.png";
+                t.setAttribute("src","images/"+$scope.fav_img);
+            }
+            else{
+                $scope.fav_img = "star1.png";
+                t.setAttribute("src","images/"+$scope.fav_img);
+            }
+        }
+
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
