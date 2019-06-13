@@ -53,7 +53,6 @@ angular.module("myApp")
                 modal.style.display = "none"
             $scope.idshow = event.target.id;
             $scope.IsDisplay = clicked == true ? false : true;
-
             /* modal setting picture */
             for (let index = 0; index < ($scope.points_arr).length; index++) {
                     if($scope.points_arr[index].name == poiName){
@@ -66,11 +65,7 @@ angular.module("myApp")
                         } 
                         $scope.recentReview= tmp;
                     }
-                
-                
-
             }
-
         }
         $scope.saveReview = function(){
             var rev = $scope.review_rank.reviewText;

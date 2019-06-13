@@ -31,6 +31,10 @@ body {
     margin: 20px;
 }
 
+#aaaa1{
+  float: initial;
+  text-align: center;
+}
 .image_class{
     float: left;
     margin: 50px;
@@ -75,7 +79,7 @@ body {
     cursor: pointer;
   }
 
-  #category{
+  #fav{
     
   }
   
