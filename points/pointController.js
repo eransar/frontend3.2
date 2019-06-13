@@ -47,6 +47,23 @@ angular.module("myApp")
         $scope.pointInfo ="";
         $scope.recentReview = "";
         $scope.clickMe = function(clicked,event,poiName){
+            url1 = "http://localhost:3000/getPoints/"+poiName;
+            $http({
+                method : "GET",
+                url : url1,
+                headers: {
+                    "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImVyYW4iLCJpYXQiOjE1NTkwNDI3NzEsImV4cCI6MTU5MDU3ODc3MX0.0aJFRZO8OjO32FJ-JpIsmHz_QAbG0TOyZSt4Jm9c9Cc",
+                }
+              }).then(function mySuccess(response) {
+                  $scope.categories = response.data;
+                  var a1 = {
+                      id:"5",
+                      category:"all"
+                  }
+                  $scope.categories.push(a1);
+                }, function myError(response) {
+                  $scope.myWelcome = response.statusText;
+            });
             if(modal.style.display = "none")
                 modal.style.display = "block";
             else
