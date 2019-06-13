@@ -1,5 +1,5 @@
 // poi controller
-angular.module("myApp").controller("registerController", function ($scope,$http) { 
+angular.module("myApp").controller("registerController", function ($scope,$http, $location) {
   /* categories req */
   "use strict";
   $http({
@@ -43,10 +43,10 @@ angular.module("myApp").controller("registerController", function ($scope,$http)
       username: $scope.container.user,
       email:$scope.container.email,
       password:$scope.container.password,
-      city:"",
       firstname:$scope.container.firstName,
       lastname:$scope.container.lastName,
       country:$scope.container.country,
+      city:$scope.container.city,
       categories:tmp,
       securityQuestions:securityQuestions,
       securityAnswers:securityAnswers
@@ -58,9 +58,12 @@ angular.module("myApp").controller("registerController", function ($scope,$http)
           }).then(function mySuccess(response) {
             // console.log(response.data);
               $scope.myWelcome = response.data;
+              $location.path('/home');
             }, function myError(response) {
               // console.log(response.statusText);
-              $scope.myWelcome = response.statusText;
+              $scope.myWelcome = response.data;
+              alert($scope.myWelcome);
+
           });
   };
 
