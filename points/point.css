@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 #h1_title{
     padding: 20px;
     width: 100%;
@@ -74,6 +75,9 @@ body {
     cursor: pointer;
   }
 
+  #category{
+    
+  }
   
   #aaa{
     float: inline-start;
@@ -83,4 +87,8 @@ body {
 
   #nameP{
     font-size: 28px;
+  }
+
+  #review_rank{
+      float: inline-start;
   }

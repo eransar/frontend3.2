@@ -4,9 +4,14 @@
     <h1 id="h1_title">
         Find Your Next Location
     </h1>
+    <div id="sortBy">
+    <select  name="category" id="category" ng-model="container.category" ng-options="c.category for c in categories" >
+        </select><br><br>
+    <input type="submit" id="submit" ng-click="sort()" value="sort" />
+    </div>
     <div id="points_div"  >
-        <div class="image_class" ng-repeat="point in points_arr">
-            <h3 class="name_user_h3">{{point.name}}</h3>
+        <div class="image_class" id = "aaaa" mg-model = "container.show" ng-bind-html="points_arr" ng-repeat="point in points_arr">
+            <h3 id="abc" class="name_user_h3">{{point.name}}</h3>
             <img id="{{point.id}}" class="image_id" ng-src="{{point.picture}}" data-ng-click="clickMe(IsDisplay,$event,point.name)" height="280" width="320"></img>
         </div>
     </div>
@@ -29,7 +34,11 @@
                         </p>
                     </div>
                 </div>
-                
+                <div id ="review_rank">
+                    <textarea ng-model ="review_rank.reviewText" id="reviewText" name="comment" placeholder="Your Review"></textarea>
+                    <input ng-model="review_rank.rank_text" id="rank_text" type="text" placeholder="rank between 1-5 " pattern="[1-5]+" ng-minlength = "1"/>
+                    <input type="submit" id="submit" ng-click="saveReview()" value="save"/>    
+                </div>
             </div>
     </div> 
 </div>
