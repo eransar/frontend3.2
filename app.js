@@ -42,6 +42,11 @@ app.config(function($routeProvider)  {
             controller : 'pointController as regCtrl',
             css: 'points/point.css'
         })
+        .when('/favorites', {
+            templateUrl: 'favorites/favorites.html',
+            controller : 'favoritesController as regCtrl',
+            css: 'favorites/favorites.css'
+        })
         // other
         .otherwise({ redirectTo: '/' });
 });
