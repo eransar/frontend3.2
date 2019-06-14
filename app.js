@@ -39,12 +39,12 @@ app.config(function($routeProvider)  {
         })
         .when('/points', {
             templateUrl: 'points/point.html',
-            controller : 'pointController as regCtrl',
+            controller : 'pointController as pointCtrl',
             css: 'points/point.css'
         })
         .when('/favorites', {
             templateUrl: 'favorites/favorites.html',
-            controller : 'favoritesController as regCtrl',
+            controller : 'favoritesController as fevCtrl',
             css: 'favorites/favorites.css'
         })
         // other
