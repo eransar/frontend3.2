@@ -9,7 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js"></script>
         <script src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-cookies.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>-->
 
         
 
@@ -27,32 +27,36 @@
         <script src="points/pointController.js"></script>
         <script src="favorites/favorites.js"></script>
 
-        <div class="menu"  ng-controller="H_controller" >
+        <div class="menu"  ng-controller="H_controller">
+            <div ng-model="app">
+                <ul>
+                    <li>
+                        <a href="#home" ng-show="!isLogin">Home</a>
+                    </li>
+                    <li>
+                        <a href="#login" ng-show="isLogin">Home2</a>
+                    </li>
+                    <li>
+                        <a href="#!points">points</a>
+                    </li>
+                    <li>
+                        <a href="#!register" ng-show="!isLogin">Register</a>
+                    </li>
+                    <li>
+                        <a href="#!search">Search</a>
+                    </li>
+                    <li>
+                        <a href="#!favorites">Favorites</a>
+                    </li>
+                    <li>
+                        <a href="#!about">About</a>
+                    </li>
+                    <li>
+                        <p>Hello</p>
+                    </li>
 
-            <ul>
-                <li>
-                    <a href="#home">Home</a>
-                </li>
-                <li>
-                    <a href="#!points">points</a>
-                </li>
-                <li>
-                    <a href="#!register">Register</a>
-                </li>
-                <li>
-                    <a href="#!search">Search</a>
-                </li>
-                <li>
-                    <a href="#!favorites">Favorites</a>
-                </li>
-                <li>
-                    <a href="#!about">About</a>
-                </li>
-                <li>
-                    <p>Hello  {{currentuser}}</p>
-                </li>
-
-            </ul>
+                </ul>
+            </div>
         </div>
         <!--<script src="pages/about/aboutController.js"></script>-->
         <!--<script src="pages/poi/poiController.js"></script>-->
