@@ -1,5 +1,7 @@
 angular.module("myApp")
-    .controller("homeLoginController", function ($scope) {
+    .controller("homeLoginController", function ($rootScope) {
+
+
 //         $scope.submit = function(){
 //         var email = function(){
 

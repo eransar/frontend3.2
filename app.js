@@ -1,5 +1,6 @@
-var app = angular.module('myApp', ["ngRoute","ngCookies"]);
+var app = angular.module('myApp', ["ngRoute","ngCookies",'ngSanitize']);
 var users_dic = "" ;
+
 
 
 
@@ -16,7 +17,8 @@ app.config(function($routeProvider)  {
         .when('/login', {
             templateUrl: 'home-login/home_login.html',
             controller : 'homeLoginController as homeLoginCtrl',
-            css: 'home-login/home_login.css'
+            css: 'home-login/home_login.css',
+            scope: { currentuser: '=' }
         })
         // about
         .when('/about', {
@@ -51,8 +53,11 @@ app.config(function($routeProvider)  {
         .otherwise({ redirectTo: '/' });
 });
 
-app.controller("H_controller", function ($http) {
+app.controller("H_controller", function ($http,$rootScope) {
     "use strict";
+    $rootScope.currentuser="guest";
+    // $scope.currentuser="guest";
+
     $http({
         method : "GET",
         url : "http://localhost:3000/points"
@@ -64,3 +69,4 @@ app.controller("H_controller", function ($http) {
     });
     
 });
+

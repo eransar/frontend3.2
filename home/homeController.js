@@ -1,4 +1,4 @@
-angular.module("myApp").controller("homeController", function ($scope,$http,$location,$cookies) {
+angular.module("myApp").controller("homeController", function ($scope,$http,$location,$cookies,$rootScope) {
 
 
         $scope.loginClick = function(){
@@ -33,6 +33,7 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
                 }).then(function mySuccess(response) {
 
                     $scope.token = response.data;
+                    $rootScope.currentuser=username1;
                     $location.path('/login');
                 }, function myError(response) {
                     $scope.loginerror = response.data;
@@ -48,6 +49,7 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
 
                     $scope.token = response.data;
                     $cookies.put('token',$scope.token);
+                    $rootScope.currentuser=username1;
                     $location.path('/login');
                 }, function myError(response) {
                     // console.log(response.statusText);

@@ -9,6 +9,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js"></script>
         <script src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-cookies.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
+
         
 
 
@@ -19,6 +21,7 @@
         <!-- load controllers -->
         <script src="register/registerController.js"></script>
         <script src="home/homeController.js"></script>
+        <script src="home-login/homeLoginController.js"></script>
         <script src="search/searchController.js"></script>
         <script src="about/aboutController.js"></script>
         <script src="points/pointController.js"></script>
@@ -47,6 +50,9 @@
                 </li>
                 <li>
                     <a href="#!about">About</a>
+                </li>
+                <li>
+                    <p>Hello  {{currentuser}}</p>
                 </li>
 
             </ul>
