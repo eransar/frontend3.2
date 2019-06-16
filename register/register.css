@@ -33,6 +33,7 @@ input.ng-invalid.ng-touched {
 }
 
 #contact input[type="text"],
+#contact input[type="password"],
 #contact input[type="email"],
 #contact input[type="tel"],
 #contact input[type="url"],
@@ -61,7 +62,7 @@ input.ng-invalid.ng-touched {
   font-size: 13px;
   font-weight: 400;
 }
-
+#contact input[type="password"],
 #contact input[type="text"],
 #contact input[type="email"],
 #contact input[type="tel"],
