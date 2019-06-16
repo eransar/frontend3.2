@@ -146,8 +146,8 @@ angular.module("myApp")
                 method : "DELETE",
                 url : "http://localhost:3000/deletePointOfInterest",
                 data: {
-                        user_name: $rootScope.currentuser.toString() ,
-                        point_name: t
+                        user_name : $rootScope.currentuser,
+                        point_name : t
                 },
                 headers: {
                     "Authorization":token_scope,
