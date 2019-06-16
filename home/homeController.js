@@ -1,6 +1,32 @@
 angular.module("myApp").controller("homeController", function ($scope,$http,$location,$cookies,$rootScope, $sce) {
 
 
+    var images;
+    $scope.images="";
+    $scope.image1="";
+    $scope.image2="";
+    $scope.image3="";
+    $scope.point1="";
+    $scope.point2="";
+    $scope.point3="";
+    //getting pictures
+    $http({
+        method : "GET",
+        url : "http://localhost:3000/getRandomPointsOfInterest"
+    }).then(function mySuccess(response) {
+        $scope.images = response.data;
+        $scope.image1="http://127.0.0.1:3000/images/"+$scope.images[0].picture;
+        $scope.image2="http://127.0.0.1:3000/images/"+$scope.images[1].picture;
+        $scope.image3="http://127.0.0.1:3000/images/"+$scope.images[2].picture;
+
+    }, function myError(response) {
+        $scope.myWelcome = response.statusText;
+    });
+
+
+
+
+
         $scope.loginClick = function(){
             var username1=document.getElementById("user_box").value;
             var password1=document.getElementById("passwd_box").value;
@@ -39,6 +65,9 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
                     $location.path('/login');
                 }, function myError(response) {
                     $scope.loginerror = response.data;
+                    if($scope.loginerror == null){
+                        alert("Server is not responding")
+                    }
                     alert($scope.loginerror);
                 });
             }
@@ -65,6 +94,9 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
 
 
         };
+
+
+    var k = 5;
 
 });
 
