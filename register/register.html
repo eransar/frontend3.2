@@ -9,7 +9,7 @@
             <small style="color: red; display:block;text-align:center">Enter a valid user , only letters , 3-8 letters</small>
         </div><br><br>
 
-        <input id="password" type="text" placeholder="password" name="password" ng-model="container.password" ng-required = "true" ng-minlength = "5" ng-maxlength = "10" pattern="[A-Za-z0-9]+" ng-pattern-restrict />
+        <input id="password" type="password" placeholder="password" name="password" ng-model="container.password" ng-required = "true" ng-minlength = "5" ng-maxlength = "10" pattern="[A-Za-z0-9]+" ng-pattern-restrict />
         <div ng-show="contactForm.password.$touched && contactForm.password.$invalid" >
             <small style="color: red; display:block;text-align:center">Enter a valid password ,must include capital letters and numbers, 5-10 letters </small>
         </div><br><br>
