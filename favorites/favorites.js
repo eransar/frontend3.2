@@ -40,12 +40,12 @@ angular.module("myApp")
                 }
             } 
         }
-
+        var token_scope =$cookies.get($rootscope.currentuser);
         $http({
             method : "GET",
             url : "http://localhost:3000/getRecentSavedPointsOfInterest/",
             headers: {
-                "Authorization":$cookies.get($rootscope.currentuser)
+                "Authorization":token_scope
             }
           }).then(function mySuccess(response) {
               points = response.data;
