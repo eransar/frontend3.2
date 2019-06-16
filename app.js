@@ -53,10 +53,10 @@ app.config(function($routeProvider)  {
         .otherwise({ redirectTo: '/' });
 });
 
-app.controller("H_controller", function ($http,$rootScope) {
+app.controller("H_controller", function ($http,$rootScope, $sce, $scope) {
     "use strict";
-    $rootScope.currentuser="guest";
-    // $scope.currentuser="guest";
+    $rootScope.currentuser="Guest";
+
 
     $http({
         method : "GET",

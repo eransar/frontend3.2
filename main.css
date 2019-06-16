@@ -7,16 +7,26 @@ ul {
     background-color: #333;
 }
 
-li,p {
+li {
     float: left;
 
 }
 
-li a, p {
+li a {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
+    text-decoration: none;
+}
+#userheader{
+    list-style-type: none;
+    margin: 0;
+    padding: 14px 16px;
+    overflow: hidden;
+    background-color: #333;
+    color: yellow;
+    text-align: center;
     text-decoration: none;
 }
 

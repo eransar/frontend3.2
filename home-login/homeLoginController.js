@@ -1,7 +1,5 @@
 angular.module("myApp")
     .controller("homeLoginController", function ($rootScope) {
-
-        $rootScope.$digest();
 //         $scope.submit = function(){
 //         var email = function(){
 
