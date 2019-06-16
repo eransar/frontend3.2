@@ -16,7 +16,7 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
             };
             var usertoken;
             try{
-                 usertoken = $cookies.get('token');
+                 usertoken = $cookies.get(username1);
             }
             catch (e) {
 
@@ -50,8 +50,8 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
                 }).then(function mySuccess(response) {
 
                     $scope.token = response.data;
-                    $cookies.put('token',$scope.token,{'time':date});
                     $rootScope.currentuser=username1;
+                    $cookies.put($rootScope.currentuser.toString(),$scope.token,{'time':date});
                     $scope.trusteduser = $sce.trustAsHtml($scope.currentuser);
                     $location.path('/login');
                 }, function myError(response) {

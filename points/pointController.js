@@ -1,7 +1,7 @@
 angular.module("myApp")
-    .controller("pointController", function ($scope,$http) {
+    .controller("pointController", function ($scope,$http,$rootScope,$cookies) {
         // Get the modal
-        $scope.fav_img = "star1.png"
+        $scope.fav_img = "star1.png";
         var tmpCategory = "";
         var modal = document.getElementById("myModal");
         // Get the <span> element that closes the modal
@@ -17,7 +17,7 @@ angular.module("myApp")
               var a1 = {
                   id:"5",
                   category:"all"
-              }
+              };
               $scope.categories.push(a1);
             }, function myError(response) {
               $scope.myWelcome = response.statusText;
@@ -27,7 +27,7 @@ angular.module("myApp")
             $scope.points_arr=[];
             for (let index1 = 0; index1 < points.length; index1++) {
                 if(points[index1].category == tmpCategory || tmpCategory =="all"){
-                    var a = new Object()
+                    var a = new Object();
                     a.name = points[index1].name;
                     a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
                     a.id = index1;
@@ -36,7 +36,7 @@ angular.module("myApp")
             } 
         }
         for (let index1 = 0; index1 < points.length; index1++) {
-            var a = new Object()
+            var a = new Object();
             a.name = points[index1].name;
             a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
             a.id = index1;
@@ -48,19 +48,16 @@ angular.module("myApp")
         $scope.pointInfo ="";
         $scope.recentReview = "";
         $scope.clickMe = function(clicked,event,poiName){
-            url1 = "http://localhost:3000/getPoints/"+poiName;
+            var url1 = "http://localhost:3000/getPoints/"+poiName;
             $http({
                 method : "GET",
-                url : url1,
-                headers: {
-                    "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImVyYW4iLCJpYXQiOjE1NTkwNDI3NzEsImV4cCI6MTU5MDU3ODc3MX0.0aJFRZO8OjO32FJ-JpIsmHz_QAbG0TOyZSt4Jm9c9Cc",
-                }
+                url : url1
               }).then(function mySuccess(response) {
                   $scope.categories = response.data;
                   var a1 = {
                       id:"5",
                       category:"all"
-                  }
+                  };
                   $scope.categories.push(a1);
                 }, function myError(response) {
                   $scope.myWelcome = response.statusText;
@@ -68,7 +65,7 @@ angular.module("myApp")
             if(modal.style.display = "none")
                 modal.style.display = "block";
             else
-                modal.style.display = "none"
+                modal.style.display = "none";
             $scope.idshow = event.target.id;
             $scope.IsDisplay = clicked == true ? false : true;
             /* modal setting picture */
@@ -84,10 +81,15 @@ angular.module("myApp")
                         $scope.recentReview= tmp;
                     }
             }
-        }
+        };
         $scope.saveReview = function(){
+            if($rootScope.currentuser==="Guest"){
+                alert("You have to be logged in to use this operation");
+                return;
+            }
             var rev = $scope.review_rank.reviewText;
             var rank = $scope.review_rank.rank_text;
+            var token = $cookies.get($rootScope.currentuser.toString());
             $http({
                 method : "PUT",
                 url : "http://localhost:3000/writeReviewPointOfInterest/reviews",
@@ -97,7 +99,7 @@ angular.module("myApp")
                         rank: rank
                 },
                 headers: {
-                    "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImVyYW4iLCJpYXQiOjE1NTkwNDI3NzEsImV4cCI6MTU5MDU3ODc3MX0.0aJFRZO8OjO32FJ-JpIsmHz_QAbG0TOyZSt4Jm9c9Cc",
+                    "Authorization":token,
                 }
               }).then(function mySuccess(response) {
                 // console.log(response.data);
@@ -119,14 +121,14 @@ angular.module("myApp")
                 $scope.fav_img = "star1.png";
                 t.setAttribute("src","images/"+$scope.fav_img);
             }
-        }
+        };
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }  
+        };
         span.onclick = function() {
             modal.style.display = "none";
         }

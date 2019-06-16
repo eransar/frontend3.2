@@ -10,6 +10,8 @@ angular.module("myApp")
         // var points = localStorage.getItem("points");
         // points =  JSON.parse(points);
         $scope.points_arr=[];
+        var token_scope =$cookies.get($rootScope.currentuser);
+        var i =5;
 
         //get categories
         $http({
@@ -32,15 +34,15 @@ angular.module("myApp")
             $scope.points_arr=[];
             for (let index1 = 0; index1 < points.length; index1++) {
                 if(points[index1].category == tmpCategory || tmpCategory =="all"){
-                    var a = new Object()
+                    var a = new Object();
                     a.name = points[index1].name;
                     a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
                     a.id = index1;
                     $scope.points_arr.push(a);
                 }
             } 
-        }
-        var token_scope =$cookies.get($rootScope.currentuser);
+        };
+
         $http({
             method : "GET",
             url : "http://localhost:3000/getRecentSavedPointsOfInterest/",
@@ -50,7 +52,7 @@ angular.module("myApp")
           }).then(function mySuccess(response) {
               points = response.data;
               for (let index1 = 0; index1 < points.length; index1++) {
-                var a = new Object()
+                var a = new Object();
                 a.name = points[index1].name;
                 a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
                 a.id = index1;
@@ -67,19 +69,19 @@ angular.module("myApp")
         $scope.pointInfo ="";
         $scope.recentReview = "";
         $scope.clickMe = function(clicked,event,poiName){
-            url1 = "http://localhost:3000/getPoints/"+poiName;
+            var url1 = "http://localhost:3000/getPoints/"+poiName;
             $http({
                 method : "GET",
                 url : url1,
                 headers: {
-                    "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImVyYW4iLCJpYXQiOjE1NTkwNDI3NzEsImV4cCI6MTU5MDU3ODc3MX0.0aJFRZO8OjO32FJ-JpIsmHz_QAbG0TOyZSt4Jm9c9Cc",
+                    "Authorization":token_scope,
                 }
               }).then(function mySuccess(response) {
                   $scope.categories = response.data;
                   var a1 = {
                       id:"5",
                       category:"all"
-                  }
+                  };
                   $scope.categories.push(a1);
                 }, function myError(response) {
                   $scope.myWelcome = response.statusText;
@@ -87,7 +89,7 @@ angular.module("myApp")
             if(modal.style.display = "none")
                 modal.style.display = "block";
             else
-                modal.style.display = "none"
+                modal.style.display = "none";
             $scope.idshow = event.target.id;
             $scope.IsDisplay = clicked == true ? false : true;
             /* modal setting picture */
@@ -103,7 +105,7 @@ angular.module("myApp")
                         $scope.recentReview= tmp;
                     }
             }
-        }
+        };
         $scope.saveReview = function(){
             var rev = $scope.review_rank.reviewText;
             var rank = $scope.review_rank.rank_text;
@@ -111,7 +113,7 @@ angular.module("myApp")
                 method : "PUT",
                 url : "http://localhost:3000/writeReviewPointOfInterest/reviews",
                 headers: {
-                    "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImVyYW4iLCJpYXQiOjE1NTkwNDI3NzEsImV4cCI6MTU5MDU3ODc3MX0.0aJFRZO8OjO32FJ-JpIsmHz_QAbG0TOyZSt4Jm9c9Cc",
+                    "Authorization":token_scope,
                 }
               }).then(function mySuccess(response) {
                 // console.log(response.data);
@@ -120,7 +122,7 @@ angular.module("myApp")
                   $scope.myWelcome = response.statusText;
               });
               
-        }
+        };
 
         $scope.imgStar = function(event){
             var t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
@@ -132,7 +134,7 @@ angular.module("myApp")
                         point_name: t
                 },
                 headers: {
-                    "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImVyYW4iLCJpYXQiOjE1NTkwNDI3NzEsImV4cCI6MTU5MDU3ODc3MX0.0aJFRZO8OjO32FJ-JpIsmHz_QAbG0TOyZSt4Jm9c9Cc",
+                    "Authorization":token_scope,
                 }
               }).then(function mySuccess(response) {
                 // console.log(response.data);
@@ -140,15 +142,15 @@ angular.module("myApp")
                 }, function myError(response) {
                   $scope.myWelcome = response.statusText;
               });
-        }
+        };
         
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }  
+        };
         span.onclick = function() {
             modal.style.display = "none";
-        }
+        };
 });
