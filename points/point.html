@@ -7,7 +7,8 @@
     <div id="sortBy">
     <select  name="category" id="category" ng-model="container.category" ng-options="c.category for c in categories" >
         </select><br><br>
-    <input type="submit" id="submit" ng-click="sort()" value="sort" />
+    <input type="submit" id="submit" ng-click="sort()" value="show category" />
+    <input type="submit" id="submit1" ng-click="sortByRank()" value="sort by rank" />
     </div>
     <div id="points_div"  >
         <div class="image_class" id = "aaaa" mg-model = "container.show" ng-bind-html="points_arr" ng-repeat="point in points_arr">

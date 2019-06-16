@@ -124,6 +124,22 @@ angular.module("myApp")
               
         };
 
+        $scope.sortByRank = function(){
+            var p_arr = points;
+            if(p_arr !=null && p_arr != ""){
+                p_arr.sort((a, b) => b.total_rank - a.total_rank);
+            }
+            $scope.points_arr=[];
+            for (let index1 = 0; index1 < p_arr.length; index1++) {
+                    var a = new Object();
+                    a.name = points[index1].name;
+                    a.picture = "http://127.0.0.1:3000/images/"+p_arr[index1].picture;
+                    a.id = index1;
+                    $scope.points_arr.push(a);
+                
+            }            
+        }
+
         $scope.imgStar = function(event){
             var t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
             $http({

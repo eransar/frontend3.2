@@ -1,5 +1,6 @@
 angular.module("myApp")
     .controller("pointController", function ($scope,$http,$rootScope,$cookies) {
+
         // Get the modal
         $scope.fav_img = "star1.png";
         var tmpCategory = "";
@@ -9,6 +10,7 @@ angular.module("myApp")
         var points = localStorage.getItem("points");
         points =  JSON.parse(points);
         $scope.points_arr=[];
+
         $http({
             method : "GET",
             url : "http://localhost:3000/categories"
@@ -22,6 +24,7 @@ angular.module("myApp")
             }, function myError(response) {
               $scope.myWelcome = response.statusText;
         });
+
         $scope.sort = function(){
             tmpCategory = $scope.container.category.category;
             $scope.points_arr=[];
@@ -35,6 +38,7 @@ angular.module("myApp")
                 }
             } 
         }
+
         for (let index1 = 0; index1 < points.length; index1++) {
             var a = new Object();
             a.name = points[index1].name;
@@ -42,11 +46,13 @@ angular.module("myApp")
             a.id = index1;
             $scope.points_arr.push(a);
         }
+
         $scope.idshow="";
         $scope.IsDisplay = false;
         $scope.showPoint="";
         $scope.pointInfo ="";
         $scope.recentReview = "";
+
         $scope.clickMe = function(clicked,event,poiName){
             var url1 = "http://localhost:3000/getPoints/"+poiName;
             $http({
@@ -82,6 +88,24 @@ angular.module("myApp")
                     }
             }
         };
+
+        $scope.sortByRank = function(){
+            var p_arr =points;
+            if(p_arr !=null && p_arr != ""){
+                p_arr.sort((a, b) => b.total_rank - a.total_rank);
+            }
+            $scope.points_arr=[];
+            for (let index1 = 0; index1 < p_arr.length; index1++) {
+                if(points[index1].category == "" || points[index1].category == tmpCategory || tmpCategory =="all"){
+                    var a = new Object();
+                    a.name = points[index1].name;
+                    a.picture = "http://127.0.0.1:3000/images/"+p_arr[index1].picture;
+                    a.id = index1;
+                    $scope.points_arr.push(a);
+                }
+            }            
+        }
+
         $scope.saveReview = function(){
             if($rootScope.currentuser==="Guest"){
                 alert("You have to be logged in to use this operation");
