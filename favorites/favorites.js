@@ -1,5 +1,5 @@
 angular.module("myApp")
-    .controller("favoritesController", function ($scope,$http,$cookies,$rootscope) {
+    .controller("favoritesController", function ($scope,$http,$cookies,$rootScope) {
         // Get the modal
         $scope.fav_img = "star1.png"
         var tmpCategory = "";
@@ -40,7 +40,7 @@ angular.module("myApp")
                 }
             } 
         }
-        var token_scope =$cookies.get($rootscope.currentuser);
+        var token_scope =$cookies.get($rootScope.currentuser);
         $http({
             method : "GET",
             url : "http://localhost:3000/getRecentSavedPointsOfInterest/",
