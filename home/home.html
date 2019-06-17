@@ -11,36 +11,57 @@
 
 
 <div ng-controller="homeController" class="container" >
-<div class="login-box">
-    <img src="images/icon.png" class="avatar" alt="Point">
-    <h1>Login Here</h1>
-    <form>
-        <!-- USERNAME INPUT -->
-        <label for="username">Username</label>
-        <input id="user_box" type="text" placeholder="Enter Username" ng-required = "true" >
-        <!-- PASSWORD INPUT -->
-        <label for="password">Password</label>
-        <input id="passwd_box" type="password" placeholder="Enter Password" ng-required = "true">
-        <input type="submit" value="Log In" ng-click="loginClick() ">
-        <a href="#">Lost your Password?</a><br>
-        <a href="#register">Don't have An account? <b>Register now </b></a>
-    </form>
-</div>
+    <div class="login-box">
+        <img src="images/icon.png" class="avatar" alt="Point">
+        <h1>Login Here</h1>
+        <form>
+            <!-- USERNAME INPUT -->
+            <label for="username">Username</label>
+            <input id="user_box" type="text" placeholder="Enter Username" ng-required = "true" >
+            <!-- PASSWORD INPUT -->
+            <label for="password">Password</label>
+            <input id="passwd_box" type="password" placeholder="Enter Password" ng-required = "true">
+            <input type="submit" value="Log In" ng-click="loginClick() ">
+            <a href="#">Lost your Password?</a><br>
+            <a href="#register">Don't have An account? <b>Register now </b></a>
+        </form>
+    </div>
 
-<div class="pointofviews" align="center">
-    <br>
-    <br>
-    <br>
-    <img src="images/icon.png" class="avatar" alt="Avatar Image">
-    <h1 class="poavatar" >Points of Interests in the city </h1>
-
-
-    <img ng-src="{{image1}}" >
-    <img ng-src="{{image2}}" >
-    <img ng-src="{{image3}}" >
+    <div class="pointofviews" align="center">
+        <br>
+        <br>
+        <br>
+        <img src="images/icon.png" class="avatar" alt="Avatar Image">
+        <h1 class="poavatar" >Points of Interests in the city </h1>
 
 
-</div>
+        <img id="img1" ng-src="{{image1}}" data-ng-click="clickMe(IsDisplay,$event)" >
+        <img id="img2" ng-src="{{image2}}" data-ng-click="clickMe(IsDisplay,$event)">
+        <img id="img3" ng-src="{{image3}}" data-ng-click="clickMe(IsDisplay,$event)">
+
+        <div id="myModal" ng-show="IsDisplay" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="nameP">
+                    {{showPoint.name}}
+                </p>
+                <div id = "selectImg">
+                    <img ng-src="{{showPoint}}" id="img_getSelected" height="280px" width="360px"></img>
+                    <p class="aaa">{{pointInfo.description}}</p>
+                    <div class="aaa">
+                        <p id="infoShow">
+                            views : {{pointInfo.views}}<br><br>
+                            rank : {{pointInfo.total_rank/5}}% <br><br>
+                            category : {{pointInfo.category}} <br><br>
+                            reviews : {{recentReview}}<br><br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
 

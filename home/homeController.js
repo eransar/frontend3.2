@@ -1,6 +1,6 @@
 angular.module("myApp").controller("homeController", function ($scope,$http,$location,$cookies,$rootScope, $sce) {
 
-
+    
     var images;
     $scope.images="";
     $scope.image1="";
@@ -9,6 +9,16 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
     $scope.point1="";
     $scope.point2="";
     $scope.point3="";
+
+    var modal = document.getElementById("myModal");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    $scope.idshow="";
+    $scope.IsDisplay = false;
+    $scope.showPoint="";
+    $scope.pointInfo ="";
+    $scope.recentReview = "";
+    var dict = new Object();
     //getting pictures
     $http({
         method : "GET",
@@ -18,14 +28,46 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
         $scope.image1="http://127.0.0.1:3000/images/"+$scope.images[0].picture;
         $scope.image2="http://127.0.0.1:3000/images/"+$scope.images[1].picture;
         $scope.image3="http://127.0.0.1:3000/images/"+$scope.images[2].picture;
-
+        dict["img1"] = $scope.images[0];
+        dict["img2"] = $scope.images[1];
+        dict["img3"] = $scope.images[2];
     }, function myError(response) {
         $scope.myWelcome = response.statusText;
     });
 
+    
+    
+    $scope.clickMe = function(clicked,event){
+        var id_of_image = event.target.id;
+        var img_show = dict[id_of_image];
+        if(modal.style.display = "none")
+            modal.style.display = "block";
+        else
+            modal.style.display = "none";
+        $scope.IsDisplay = clicked == true ? false : true;
+        $scope.showPoint = "http://127.0.0.1:3000/images/"+dict[id_of_image].picture;
+        $scope.pointInfo = dict[id_of_image];
+        $scope.recentReview = JSON.parse(dict[id_of_image].recent_reviews);
+        var tmp = "";
+        if($scope.recentReview !=null){
+            for(let in1 = 0; in1 < ($scope.recentReview).length;in1++){
+                tmp = tmp + ($scope.recentReview)[in1].review + " " + ($scope.recentReview)[in1].date+"  " ;
+            } 
+            $scope.recentReview= tmp;
+            }
+    }
 
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
 
-
+    
 
         $scope.loginClick = function(){
             var username1=document.getElementById("user_box").value;

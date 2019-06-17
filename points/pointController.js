@@ -3,6 +3,7 @@ angular.module("myApp")
 
         // Get the modal
         $scope.fav_img = "star1.png";
+        var dict = new Object();
         var tmpCategory = "";
         var modal = document.getElementById("myModal");
         // Get the <span> element that closes the modal
@@ -38,7 +39,7 @@ angular.module("myApp")
                 }
             } 
         }
-
+        
         for (let index1 = 0; index1 < points.length; index1++) {
             var a = new Object();
             a.name = points[index1].name;
@@ -46,6 +47,8 @@ angular.module("myApp")
             a.id = index1;
             $scope.points_arr.push(a);
         }
+
+        
 
         $scope.idshow="";
         $scope.IsDisplay = false;
@@ -72,6 +75,7 @@ angular.module("myApp")
                 modal.style.display = "block";
             else
                 modal.style.display = "none";
+            
             $scope.idshow = event.target.id;
             $scope.IsDisplay = clicked == true ? false : true;
             /* modal setting picture */
@@ -137,9 +141,9 @@ angular.module("myApp")
         $scope.imgStar = function(event){
             var token = $cookies.get($rootScope.currentuser.toString());
             var t_id = document.getElementById(event.target.id);
-            if($scope.fav_img == "star1.png"){
-                var t = "";
-                t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
+            var r =document.getElementById(event.target.id).parentElement.childNodes[3].currentSrc.split("/")[4];
+            var t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
+            if(r == "star1.png"){
                 var arr_poiint_to_send = new Array();
                 arr_poiint_to_send.push(t);
             $http({
@@ -155,15 +159,13 @@ angular.module("myApp")
               }).then(function mySuccess(response) {
                 $scope.fav_img = "star.png";
                 t_id.setAttribute("src","images/"+$scope.fav_img);
-                // console.log(response.data);
+                // console.log(response.data);  
                 $scope.questions = response.data;
                 }, function myError(response) {
                   $scope.myWelcome = response.statusText;
               });
             }
             else{
-                
-                t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
                 $http({
                     method : "DELETE",
                     url : "http://localhost:3000/deletePointOfInterest",

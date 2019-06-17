@@ -142,22 +142,22 @@ angular.module("myApp")
 
         $scope.imgStar = function(event){
             var t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
-            $http({
-                method : "DELETE",
-                url : "http://localhost:3000/deletePointOfInterest",
-                data: {
-                        user_name : $rootScope.currentuser,
-                        point_name : t
-                },
-                headers: {
-                    "Authorization":token_scope,
-                }
-              }).then(function mySuccess(response) {
-                // console.log(response.data);
-                $scope.questions = response.data;
-                }, function myError(response) {
-                  $scope.myWelcome = response.statusText;
-              });
+            // $http({
+            //     method : "DELETE",
+            //     url : "http://localhost:3000/deletePointOfInterest",
+            //     data: {
+            //             user_name : $rootScope.currentuser,
+            //             point_name : t
+            //     },
+            //     headers: {
+            //         "Authorization":token_scope,
+            //     }
+            //   }).then(function mySuccess(response) {
+            //     // console.log(response.data);
+            //     $scope.questions = response.data;
+            //     }, function myError(response) {
+            //       $scope.myWelcome = response.statusText;
+            //   });
         };
         
         // When the user clicks anywhere outside of the modal, close it
