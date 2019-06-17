@@ -12,12 +12,6 @@ angular.module("myApp")
         points =  JSON.parse(points);
         $scope.points_arr=[];
         $scope.points2 = new Object();
-        // for (let index = 0; index < points.length; index++) {
-        //     // $scope.points2[index] = "http://127.0.0.1:3000/images/star1.png"
-        //     points[index].push({
-        //         star:"http://127.0.0.1:3000/images/star1.png"
-        //     })
-        // }
 
         $http({
             method : "GET",
@@ -65,7 +59,7 @@ angular.module("myApp")
             }
           }).then(function mySuccess(response) {
               $scope.points2 = response.data;
-              for (let index1 = 0; index1 <  $scope.points2.length; index1++) {
+              for (let index1 = 0; index1 <  points.length; index1++) {
                 if($scope.points2.includes($scope.points_arr[index1].name)){
                     $scope.points_arr[index1].star = "images/star.png"
                 }

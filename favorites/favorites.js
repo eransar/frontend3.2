@@ -53,7 +53,7 @@ angular.module("myApp")
             }
           }).then(function mySuccess(response) {
               var points2 = response.data;
-              for (let index1 = 0; index1 < points2.length; index1++) {
+              for (let index1 = 0; index1 < points1.length; index1++) {
                 if(points2.includes(points1[index1].name)){
                     var a = new Object();
                     a.name = points1[index1].name;
@@ -120,7 +120,6 @@ angular.module("myApp")
                     "Authorization":token_scope,
                 }
               }).then(function mySuccess(response) {
-                // console.log(response.data);
                 $scope.questions = response.data;
                 }, function myError(response) {
                   $scope.myWelcome = response.statusText;
@@ -146,23 +145,47 @@ angular.module("myApp")
 
         $scope.imgStar = function(event){
             var t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
-            // $http({
-            //     method : "DELETE",
-            //     url : "http://localhost:3000/deletePointOfInterest",
-            //     data: {
-            //             user_name : $rootScope.currentuser,
-            //             point_name : t
-            //     },
-            //     headers: {
-            //         'Content-Type':"application/json",
-            //         "Authorization":token_scope,
-            //     }
-            //   }).then(function mySuccess(response) {
-            //     // console.log(response.data);
-            //     $scope.questions = response.data;
-            //     }, function myError(response) {
-            //       $scope.myWelcome = response.statusText;
-            //   });
+            $http({
+                method : "DELETE",
+                url : "http://localhost:3000/deletePointOfInterest",
+                data: {
+                        user_name :{
+                            username:$rootScope.currentuser
+                        } ,
+                        point_name : t
+                },
+                headers: {
+                    'Content-Type':"application/json;charset=utf-8",
+                    "Authorization":token_scope,
+                }
+              }).then(function mySuccess(response) {
+                // console.log(response.data);
+                $scope.points_arr=[];
+                $http({
+
+                    method : "GET",
+                    url : "http://localhost:3000/getInterest",
+                    headers: {
+                    "Authorization":token_scope
+                    }
+                  }).then(function mySuccess(response) {
+                      var points2 = response.data;
+                      for (let index1 = 0; index1 < points1.length; index1++) {
+                        if(points2.includes(points1[index1].name)){
+                            var a = new Object();
+                            a.name = points1[index1].name;
+                            a.picture = "http://127.0.0.1:3000/images/"+points1[index1].picture;
+                            a.id = index1;
+                            $scope.points_arr.push(a);
+                        }
+                    }
+                    }, function myError(response) {
+                      $scope.myWelcome = response.statusText;
+                });
+                $scope.questions = response.data;
+                }, function myError(response) {
+                  $scope.myWelcome = response.statusText;
+              });
         };
         
         // When the user clicks anywhere outside of the modal, close it
