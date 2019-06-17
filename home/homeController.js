@@ -1,6 +1,6 @@
-angular.module("myApp").controller("homeController", function ($scope,$http,$location,$cookies,$rootScope, $sce) {
+angular.module("myApp").controller("homeController", function ($scope,$http,$location,$cookies,$rootScope) {
 
-    
+
     var images;
     $scope.images="";
     $scope.image1="";
@@ -55,7 +55,7 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
             } 
             $scope.recentReview= tmp;
             }
-    }
+    };
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
@@ -65,7 +65,7 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
     };
     span.onclick = function() {
         modal.style.display = "none";
-    }
+    };
 
     
 
@@ -103,7 +103,7 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
 
                     $scope.token = response.data;
                     $rootScope.currentuser=username1;
-                    $scope.trusteduser = $sce.trustAsHtml($scope.currentuser);
+                    $rootScope.userconnected=true;
                     $location.path('/login');
                 }, function myError(response) {
                     $scope.loginerror = response.data;
@@ -123,7 +123,7 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
                     $scope.token = response.data;
                     $rootScope.currentuser=username1;
                     $cookies.put($rootScope.currentuser.toString(),$scope.token,{'time':date});
-                    $scope.trusteduser = $sce.trustAsHtml($scope.currentuser);
+                    $rootScope.userconnected=true;
                     $location.path('/login');
                 }, function myError(response) {
                     // console.log(response.statusText);
@@ -136,9 +136,6 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
 
 
         };
-
-
-    var k = 5;
 
 });
 
