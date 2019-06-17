@@ -145,25 +145,45 @@ angular.module("myApp")
             var t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
             if(r == "star1.png"){
                 var arr_poiint_to_send = new Array();
-                arr_poiint_to_send.push(t);
-            $http({
-                method : "POST",
-                url : "http://localhost:3000/saveArrOfPointOfInterest",
-                data: {
-                        username: $rootScope.currentuser.toString() ,
-                        pointsNames: arr_poiint_to_send
-                },
-                headers: {
-                    "Authorization":token,
-                }
-              }).then(function mySuccess(response) {
-                $scope.fav_img = "star.png";
-                t_id.setAttribute("src","images/"+$scope.fav_img);
-                // console.log(response.data);  
-                $scope.questions = response.data;
-                }, function myError(response) {
-                  $scope.myWelcome = response.statusText;
-              });
+                var arrpoitmp = new Array();
+                $http({
+                    method : "GET",
+                    url : "http://localhost:3000/getRecentSavedPointsOfInterest/",
+                    headers: {
+                        "Authorization":token
+                    }
+                  }).then(function mySuccess(response) {
+                    arrpoitmp = response.data;
+                    var bool1 = true;
+                    for (let index = 0; index < arrpoitmp.length; index++) {
+                        if(t==arrpoitmp[index].name)
+                        bool1=false;
+                    }
+                    if(bool1){
+                        arr_poiint_to_send.push(t);
+                        $http({
+                            method : "POST",
+                            url : "http://localhost:3000/saveArrOfPointOfInterest",
+                            data: {
+                                    username: $rootScope.currentuser.toString() ,
+                                    pointsNames: arr_poiint_to_send
+                            },
+                            headers: {
+                                "Authorization":token,
+                            }
+                        }).then(function mySuccess(response) {
+                            $scope.fav_img = "star.png";
+                            t_id.setAttribute("src","images/"+$scope.fav_img);
+                            // console.log(response.data);  
+                            $scope.questions = response.data;
+                            }, function myError(response) {
+                            $scope.myWelcome = response.statusText;
+                        });
+                    }
+                    }, function myError(response) {
+                      $scope.myWelcome = response.statusText;
+                });
+                
             }
             else{
                 $http({

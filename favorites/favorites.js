@@ -45,9 +45,12 @@ angular.module("myApp")
 
         $http({
             method : "GET",
-            url : "http://localhost:3000/getRecentSavedPointsOfInterest/",
+            url : "http://localhost:3000/getInterest",
+            data: {
+                username:$rootScope.currentuser
+            },
             headers: {
-                "Authorization":token_scope
+            "Authorization":token_scope
             }
           }).then(function mySuccess(response) {
               points = response.data;
@@ -150,6 +153,7 @@ angular.module("myApp")
             //             point_name : t
             //     },
             //     headers: {
+            //         'Content-Type':"application/json",
             //         "Authorization":token_scope,
             //     }
             //   }).then(function mySuccess(response) {
