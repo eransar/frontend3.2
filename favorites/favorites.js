@@ -7,7 +7,7 @@ angular.module("myApp")
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
         var points = [];
-        // var points = localStorage.getItem("points");
+        var points1 = JSON.parse(localStorage.getItem("points"));
         // points =  JSON.parse(points);
         $scope.points_arr=[];
         var token_scope =$cookies.get($rootScope.currentuser);
@@ -52,14 +52,16 @@ angular.module("myApp")
             "Authorization":token_scope
             }
           }).then(function mySuccess(response) {
-              points = response.data;
-              for (let index1 = 0; index1 < points.length; index1++) {
-                var a = new Object();
-                a.name = points[index1].name;
-                a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
-                a.id = index1;
-                $scope.points_arr.push(a);
-        }
+              var points2 = response.data;
+              for (let index1 = 0; index1 < points2.length; index1++) {
+                if(points2.includes(points1[index1].name)){
+                    var a = new Object();
+                    a.name = points1[index1].name;
+                    a.picture = "http://127.0.0.1:3000/images/"+points1[index1].picture;
+                    a.id = index1;
+                    $scope.points_arr.push(a);
+                }
+            }
             }, function myError(response) {
               $scope.myWelcome = response.statusText;
         });
