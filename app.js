@@ -53,9 +53,10 @@ app.config(function($routeProvider)  {
         .otherwise({ redirectTo: '/' });
 });
 
-app.controller("H_controller", function ($http,$rootScope, $sce, $scope) {
+app.controller("H_controller", function ($http,$rootScope, $scope,$location) {
     "use strict";
     $rootScope.currentuser="Guest";
+    $rootScope.userconnected = false;
 
 
     $http({
@@ -67,6 +68,12 @@ app.controller("H_controller", function ($http,$rootScope, $sce, $scope) {
         }, function myError(response) {
           users_dic =  response.statusText;
     });
+
+    $scope.logout=function(){
+        $rootScope.currentuser="Guest";
+        $rootScope.userconnected = false;
+        $location.path('/');
+    };
     
 });
 

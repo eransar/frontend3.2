@@ -31,25 +31,28 @@
             <div ng-model="app">
                 <ul>
                     <li>
-                        <a href="#home" ng-show="!isLogin">Home</a>
+                        <a href="#home" ng-show="!userconnected">Home</a>
                     </li>
                     <li>
-                        <a href="#login" ng-show="isLogin">Home2</a>
+                        <a href="#!login" ng-show="userconnected">Home</a>
                     </li>
                     <li>
                         <a href="#!points">points</a>
                     </li>
                     <li>
-                        <a href="#!register" ng-show="!isLogin">Register</a>
+                        <a href="#!register" ng-show="!userconnected">Register</a>
                     </li>
                     <li>
                         <a href="#!search">Search</a>
                     </li>
                     <li>
-                        <a href="#!favorites">Favorites</a>
+                        <a href="#!favorites" ng-show="userconnected">Favorites</a>
                     </li>
                     <li>
                         <a href="#!about">About</a>
+                    </li>
+                    <li>
+                        <a ng-show="userconnected" ng-click="logout()">LogOut</a>
                     </li>
                     <li>
                         <p id="userheader"ng-bind-html="currentuser">Hello {{currentuser}} </p>
