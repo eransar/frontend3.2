@@ -12,6 +12,7 @@ angular.module("myApp")
         $scope.points_arr=[];
         var token_scope =$cookies.get($rootScope.currentuser);
         var i =5;
+        var user1=$rootScope.currentuser;
 
         //get categories
         $http({
@@ -44,11 +45,9 @@ angular.module("myApp")
         };
 
         $http({
+
             method : "GET",
             url : "http://localhost:3000/getInterest",
-            data: {
-                username:$rootScope.currentuser
-            },
             headers: {
             "Authorization":token_scope
             }
