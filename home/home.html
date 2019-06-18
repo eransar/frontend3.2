@@ -22,7 +22,7 @@
             <label for="password">Password</label>
             <input id="passwd_box" type="password" placeholder="Enter Password" ng-required = "true">
             <input type="submit" value="Log In" ng-click="loginClick() ">
-            <a href="#">Lost your Password?</a><br>
+            <a href="" data-ng-click="clickRestore(IsRestore,$event)">Lost your Password?</a><br>
             <a href="#register">Don't have An account? <b>Register now </b></a>
         </form>
     </div>
@@ -61,6 +61,16 @@
             </div>
         </div>
 
+    </div>
+
+    <div id="RestorePasswordModal" ng-show="IsRestore" class="modal2">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p>"aaaaa"</p>
+
+            <span class="close1">&times;</span>
+
+        </div>
     </div>
 
 

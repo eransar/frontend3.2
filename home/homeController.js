@@ -9,12 +9,20 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
     $scope.point1="";
     $scope.point2="";
     $scope.point3="";
+    $scope.question1="";
+    $scope.question2="";
 
     var modal = document.getElementById("myModal");
+    var restoremodal = document.getElementById("RestorePasswordModal");
+    restoremodal.style.display = "none";
+
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
+    var span1 = document.getElementsByClassName("close1")[0];
+
     $scope.idshow="";
     $scope.IsDisplay = false;
+    $scope.IsRestore = false;
     $scope.showPoint="";
     $scope.pointInfo ="";
     $scope.recentReview = "";
@@ -35,6 +43,32 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
         $scope.myWelcome = response.statusText;
     });
 
+    $scope.clickRestore = function(clicked,event){
+        if(restoremodal.style.display === "none")
+            restoremodal.style.display = "block";
+
+        else
+            restoremodal.style.display = "none";
+
+
+
+        $scope.IsRestore = clicked == true ? false : true;
+    }
+
+    $http({
+        method : "GET",
+        url : "http://localhost:3000/questions"
+    }).then(function mySuccess(response) {
+        $scope.questions = response.data;
+        $scope.image1="http://127.0.0.1:3000/images/"+$scope.images[0].picture;
+        $scope.image2="http://127.0.0.1:3000/images/"+$scope.images[1].picture;
+        $scope.image3="http://127.0.0.1:3000/images/"+$scope.images[2].picture;
+    }, function myError(response) {
+        $scope.myWelcome = response.statusText;
+    });
+
+
+
     
     
     $scope.clickMe = function(clicked,event){
@@ -45,6 +79,7 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
         else
             modal.style.display = "none";
         $scope.IsDisplay = clicked == true ? false : true;
+
         $scope.showPoint = "http://127.0.0.1:3000/images/"+dict[id_of_image].picture;
         $scope.pointInfo = dict[id_of_image];
         $scope.recentReview = JSON.parse(dict[id_of_image].recent_reviews);
@@ -59,12 +94,17 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-        if (event.target == modal) {
+        if (event.target == modal || event.target==restoremodal) {
             modal.style.display = "none";
+            restoremodal.style.display="none";
         }
     };
     span.onclick = function() {
         modal.style.display = "none";
+    };
+    span1.onclick = function() {
+        restoremodal.style.display = "none";
+        $scope.IsRestore = false;
     };
 
     
