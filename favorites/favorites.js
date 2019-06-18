@@ -13,7 +13,7 @@ angular.module("myApp")
         var token_scope =$cookies.get($rootScope.currentuser);
         var i =5;
         var user1=$rootScope.currentuser;
-
+        var tempPoints=[];
         //get categories
         $http({
             method : "GET",
@@ -29,20 +29,7 @@ angular.module("myApp")
               $scope.myWelcome = response.statusText;
         });
 
-        /** sorting categories */
-        $scope.sort = function(){
-            tmpCategory = $scope.container.category.category;
-            $scope.points_arr=[];
-            for (let index1 = 0; index1 < points.length; index1++) {
-                if(points[index1].category == tmpCategory || tmpCategory =="all"){
-                    var a = new Object();
-                    a.name = points[index1].name;
-                    a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
-                    a.id = index1;
-                    $scope.points_arr.push(a);
-                }
-            } 
-        };
+        
 
         $http({
 
@@ -59,19 +46,40 @@ angular.module("myApp")
                     a.name = points1[index1].name;
                     a.picture = "http://127.0.0.1:3000/images/"+points1[index1].picture;
                     a.id = index1;
+                    a.category = points1[index1].category;
+                    a.total_rank = points1[index1].total_rank;
                     $scope.points_arr.push(a);
                 }
             }
+            tempPoints = $scope.points_arr;
             }, function myError(response) {
               $scope.myWelcome = response.statusText;
         });
 
-        
+        /** sorting categories */
+        $scope.sort = function(){
+            var points = tempPoints;
+            tmpCategory = $scope.container.category.category;
+            $scope.points_arr=[];
+            for (let index1 = 0; index1 < points.length; index1++) {
+                if(points[index1].category == tmpCategory || tmpCategory =="all"){
+                    var a = new Object();
+                    a.name = points[index1].name;
+                    a.picture = points[index1].picture;
+                    a.id = index1;
+                    a.total_rank = points1[index1].total_rank;
+                    a.category =points1[index1].category ;
+                    $scope.points_arr.push(a);
+                }
+            }
+        };
         $scope.idshow="";
         $scope.IsDisplay = false;
         $scope.showPoint="";
         $scope.pointInfo ="";
         $scope.recentReview = "";
+
+        
         $scope.clickMe = function(clicked,event,poiName){
             var url1 = "http://localhost:3000/getPoints/"+poiName;
             $http({
@@ -128,16 +136,18 @@ angular.module("myApp")
         };
 
         $scope.sortByRank = function(){
-            var p_arr = points;
+            var p_arr = tempPoints;
             if(p_arr !=null && p_arr != ""){
                 p_arr.sort((a, b) => b.total_rank - a.total_rank);
             }
             $scope.points_arr=[];
             for (let index1 = 0; index1 < p_arr.length; index1++) {
                     var a = new Object();
-                    a.name = points[index1].name;
-                    a.picture = "http://127.0.0.1:3000/images/"+p_arr[index1].picture;
+                    a.name = points1[index1].name;
+                    a.picture = p_arr[index1].picture;
                     a.id = index1;
+                    a.total_rank = points1[index1].total_rank;
+                    a.category =points1[index1].category ;
                     $scope.points_arr.push(a);
                 
             }            
