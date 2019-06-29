@@ -26,6 +26,7 @@
         <script src="about/aboutController.js"></script>
         <script src="points/pointController.js"></script>
         <script src="favorites/favorites.js"></script>
+        <script src="restorePassword/restorePasswordController.js"></script>
 
         <div class="menu"  ng-controller="H_controller">
             <div ng-model="app">
@@ -35,6 +36,9 @@
                     </li>
                     <li>
                         <a href="#!login" ng-show="userconnected">Home</a>
+                    </li>
+                    <li>
+                        <a href="#!restorePassword" ng-show="!userconnected">Restore Password</a>
                     </li>
                     <li>
                         <a href="#!points">points</a>
@@ -54,8 +58,12 @@
                     <li>
                         <a ng-show="userconnected" ng-click="logout()">LogOut</a>
                     </li>
-                    <li>
-                        <p id="userheader"ng-bind-html="currentuser">Hello {{currentuser}} </p>
+                    <li id="userheader">
+                        <tr>
+<!--                            <td> Hello </td>-->
+                            <td align="right"  ng-bind="currentuser" color="#bdff96">Hello {{currentuser}}</td>
+                        </tr>
+<!--                        <p id="userheader"ng-bind="currentuser">Hello {{currentuser}}</p>-->
                     </li>
 
                 </ul>

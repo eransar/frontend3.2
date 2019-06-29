@@ -25,7 +25,27 @@ li a {
     padding: 14px 16px;
     overflow: hidden;
     background-color: #333;
-    color: yellow;
+    color: #bdff96;
+    text-align: center;
+    text-decoration: none;
+}
+#userheader .td{
+    list-style-type: none;
+    margin: 0;
+    padding: 14px 16px;
+    overflow: hidden;
+    background-color: #333;
+    color: #bdff96;
+    text-align: center;
+    text-decoration: none;
+}
+.userheader_class{
+    list-style-type: none;
+    margin: 0;
+    padding: 14px 16px;
+    overflow: hidden;
+    background-color: #333;
+    color: #bdff96;
     text-align: center;
     text-decoration: none;
 }

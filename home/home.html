@@ -22,7 +22,7 @@
             <label for="password">Password</label>
             <input id="passwd_box" type="password" placeholder="Enter Password" ng-required = "true">
             <input type="submit" value="Log In" ng-click="loginClick() ">
-            <a href="" data-ng-click="clickRestore(IsRestore,$event)">Lost your Password?</a><br>
+            <a href="#!restorePassword" >Lost your Password?</a><br>
             <a href="#register">Don't have An account? <b>Register now </b></a>
         </form>
     </div>
@@ -65,10 +65,64 @@
 
     <div id="RestorePasswordModal" ng-show="IsRestore" class="modal2">
         <!-- Modal content -->
-        <div class="modal-content">
-            <p>"aaaaa"</p>
-
+        <div class="modal2-content">
             <span class="close1">&times;</span>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <p class="">
+                            </p><div><span style="line-height: 1.42857;">Lost your password?</span>
+                            <br>
+                        </div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>Type in your username and hit that Forgot button, a question box will appear
+                                with the security questions you supplied us when you signed up</div>
+                            <div>
+                                <br>
+                            </div>
+                                <br>
+                            </div>
+                            <div>Have a nice day!</div>
+                            <div>
+                                <br>
+                            </div>
+                            <p></p>
+                            <div class="panel-body">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input class="form-control input-lg" placeholder="Username" id="username" ng-required = "true" >
+                                    </div>
+                                    <input class="btn_forgot" value="Forgot" type="submit" ng-click="forgotClick() ">
+                                    <br>
+
+                                    <div class="questions">
+
+                                        <div ng-show="Isquestion1">
+                                            <p ng-bind="question1"></p>
+                                            <input type="text" placeholder="Answer the question" ng-required = "true" id="answer1">
+                                            <input class="btn_forgot" value="Check Questions" type="submit">
+                                        </div>
+
+                                        <div ng-show="Isquestion2">
+                                            <p ng-bind="question2"></p>
+                                            <input type="text" placeholder="Answer the question" ng-required = "true" id="answer2">
+
+                                        </div>
+                                        </fieldset>
+
+
+
+                                    </div>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+
+
 
         </div>
     </div>

@@ -9,8 +9,9 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
     $scope.point1="";
     $scope.point2="";
     $scope.point3="";
-    $scope.question1="";
-    $scope.question2="";
+
+
+
 
     var modal = document.getElementById("myModal");
     var restoremodal = document.getElementById("RestorePasswordModal");
@@ -102,10 +103,9 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
     span.onclick = function() {
         modal.style.display = "none";
     };
-    span1.onclick = function() {
-        restoremodal.style.display = "none";
-        $scope.IsRestore = false;
-    };
+
+
+
 
     
 

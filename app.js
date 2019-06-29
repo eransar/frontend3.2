@@ -44,6 +44,11 @@ app.config(function($routeProvider)  {
             controller : 'pointController as pointCtrl',
             css: 'points/point.css'
         })
+        .when('/restorePassword', {
+            templateUrl: 'restorePassword/restorePassword.html',
+            controller : 'restorePasswordController as restorePasswordController',
+            css: 'restorePassword/restorePassword.css'
+        })
         .when('/favorites', {
             templateUrl: 'favorites/favorites.html',
             controller : 'favoritesController as fevCtrl',
