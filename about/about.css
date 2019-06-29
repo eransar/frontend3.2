@@ -1,5 +1,5 @@
 body {
-   background-color:eee;
+   background-color:white;
    background-size: unset;
     font-family: sans-serif;
     margin: 0;
@@ -48,6 +48,39 @@ body {
   top: 30%;
   left: 30%;
  }
+
+.column2{
+  margin-top: 25%;
+  padding-top: 2%;
+  padding-bottom: 8%;
+  background-color: eee;
+}
+
+#column2_text{
+  font-size: 90;
+  margin-bottom: 4%;
+  margin-left: 40%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+#team_title{
+  font-size: 100;
+  margin-left: 40%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#column2_text_sub{
+  margin-left: 40%;
+  font-size: 42px;
+  color: grey;
+  font-family: Georgia, 'Times New Roman', Times, serif
+}
+
+
+.img2{
+padding-left: 7%;
+}
 
 #contact{
   font-size: 36px;
