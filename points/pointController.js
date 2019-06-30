@@ -141,6 +141,49 @@ angular.module("myApp")
             $scope.recentReview= tmp;  
         };
 
+
+        $scope.search = function(){
+            var value_to_search = document.getElementById("search").value;
+            $scope.points_arr=[];
+            for (let index1 = 0; index1 < points.length; index1++) {
+                if(points[index1].name == value_to_search){
+                    var a = new Object();
+                    a.name = points[index1].name;
+                    a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
+                    a.id = index1;
+                    if(!($rootScope.currentuser.toString()=="Guest"))
+                        a.star ="images/star1.png"
+                    a.category = points[index1].category;
+                    $scope.points_arr.push(a);
+                }
+            }
+            if(!($rootScope.currentuser.toString()=="Guest")){
+                $http({
+                    method : "GET",
+                    url : "http://localhost:3000/getInterest",
+                    headers: {
+                    "Authorization":token
+                    }
+                }).then(function mySuccess(response) {
+                    $scope.points2 = response.data;
+                    for (let index1 = 0; index1 <  points.length; index1++) {
+                        if($scope.points2.includes($scope.points_arr[index1].name)){
+                            $scope.points_arr[index1].star = "images/star.png"
+                        }
+                        else{
+                            $scope.points_arr[index1].star ="images/star1.png"
+    
+                        }
+                    }
+                    }, function myError(response) {
+                    $scope.myWelcome = response.statusText;
+                });
+            }
+            if($scope.points_arr.length ==0){
+                alert("no result found");
+            }
+        }
+
         $scope.sortByRank = function(){
             var p_arr =points;
             if(p_arr !=null && p_arr != ""){
