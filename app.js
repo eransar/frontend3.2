@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ["ngRoute","ngCookies"]);
+var app = angular.module('myApp', ["ngRoute","ngCookies","angular.filter"]);
 var users_dic = "" ;
 
 

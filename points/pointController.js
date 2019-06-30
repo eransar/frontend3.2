@@ -10,6 +10,19 @@ angular.module("myApp")
         var span = document.getElementsByClassName("close")[0];
         var points = localStorage.getItem("points");
         points =  JSON.parse(points);
+
+        function compareStrings(a, b) {
+            // Assuming you want case-insensitive comparison
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+          
+            return (a < b) ? -1 : (a > b) ? 1 : 0;
+          }
+          
+          points.sort(function(a, b) {
+            return compareStrings(a.category, b.category);
+          })
+
         $scope.points_arr=[];
         $scope.points2 = new Object();
 
@@ -26,40 +39,6 @@ angular.module("myApp")
             }, function myError(response) {
               $scope.myWelcome = response.statusText;
         });
-
-        $scope.sort = function(){
-            tmpCategory = $scope.container.category.category;
-            $scope.points_arr=[];
-            for (let index1 = 0; index1 < points.length; index1++) {
-                if(points[index1].category == tmpCategory || tmpCategory =="all"){
-                    var a = new Object();
-                    a.name = points[index1].name;
-                    a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
-                    a.id = index1;
-                    $scope.points_arr.push(a);
-                }
-            }
-            $http({
-                method : "GET",
-                url : "http://localhost:3000/getInterest",
-                headers: {
-                "Authorization":token
-                }
-              }).then(function mySuccess(response) {
-                  $scope.points2 = response.data;
-                  for (let index1 = 0; index1 <  points.length; index1++) {
-                    if($scope.points2.includes($scope.points_arr[index1].name)){
-                        $scope.points_arr[index1].star = "images/star.png"
-                    }
-                    else{
-                        $scope.points_arr[index1].star ="images/star1.png"
-    
-                    }
-                }
-                }, function myError(response) {
-                  $scope.myWelcome = response.statusText;
-            }); 
-        }
         
         for (let index1 = 0; index1 < points.length; index1++) {
             var a = new Object();
@@ -67,6 +46,7 @@ angular.module("myApp")
             a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
             a.id = index1;
             a.star ="images/star1.png"
+            a.category = points[index1].category;
             $scope.points_arr.push(a);
         }
         var token = $cookies.get($rootScope.currentuser.toString());
@@ -91,6 +71,46 @@ angular.module("myApp")
             }, function myError(response) {
               $scope.myWelcome = response.statusText;
         });
+
+        $scope.sort = function(){
+            tmpCategory = $scope.container.category.category;
+            $scope.points_arr=[];
+            for (let index1 = 0; index1 < points.length; index1++) {
+                if(points[index1].category == tmpCategory || tmpCategory =="all"){
+                    var a = new Object();
+                    a.name = points[index1].name;
+                    a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
+                    a.id = index1;
+                    a.category = points[index1].category;
+                    $scope.points_arr.push(a);
+                }
+            }
+            if($rootScope.currentuser.toString()=="Guest"){
+                for (let index1 = 0; index1 <  points.length; index1++)
+                    $scope.points_arr[index1].star = "images/star1.png"            }
+            else{
+                $http({
+                    method : "GET",
+                    url : "http://localhost:3000/getInterest",
+                    headers: {
+                    "Authorization":token
+                    }
+                }).then(function mySuccess(response) {
+                    $scope.points2 = response.data;
+                    for (let index1 = 0; index1 <  points.length; index1++) {
+                        if($scope.points2.includes($scope.points_arr[index1].name)){
+                            $scope.points_arr[index1].star = "images/star.png"
+                        }
+                        else{
+                            $scope.points_arr[index1].star ="images/star1.png"
+        
+                        }
+                    }
+                    }, function myError(response) {
+                    $scope.myWelcome = response.statusText;
+                }); 
+            }
+        }
 
         $scope.idshow="";
         $scope.IsDisplay = false;
@@ -147,29 +167,35 @@ angular.module("myApp")
                     a.name = points[index1].name;
                     a.picture = "http://127.0.0.1:3000/images/"+p_arr[index1].picture;
                     a.id = index1;
+                    a.category = points[index1].category;
                     $scope.points_arr.push(a);
                 }
-            }     
-            $http({
-                method : "GET",
-                url : "http://localhost:3000/getInterest",
-                headers: {
-                "Authorization":token
-                }
-              }).then(function mySuccess(response) {
-                  $scope.points2 = response.data;
-                  for (let index1 = 0; index1 <  points.length; index1++) {
-                    if($scope.points2.includes($scope.points_arr[index1].name)){
-                        $scope.points_arr[index1].star = "images/star.png"
+            }
+            if($rootScope.currentuser.toString()=="Guest"){
+                for (let index1 = 0; index1 <  points.length; index1++)
+                    $scope.points_arr[index1].star = "images/star1.png"            }
+            else{
+                $http({
+                    method : "GET",
+                    url : "http://localhost:3000/getInterest",
+                    headers: {
+                    "Authorization":token
                     }
-                    else{
-                        $scope.points_arr[index1].star ="images/star1.png"
-    
+                }).then(function mySuccess(response) {
+                    $scope.points2 = response.data;
+                    for (let index1 = 0; index1 <  points.length; index1++) {
+                        if($scope.points2.includes($scope.points_arr[index1].name)){
+                            $scope.points_arr[index1].star = "images/star.png"
+                        }
+                        else{
+                            $scope.points_arr[index1].star ="images/star1.png"
+        
+                        }
                     }
-                }
-                }, function myError(response) {
-                  $scope.myWelcome = response.statusText;
-            });       
+                    }, function myError(response) {
+                    $scope.myWelcome = response.statusText;
+                });   
+            }    
         }
 
         $scope.saveReview = function(){

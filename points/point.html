@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="points/point.css">
 
+
 <div id="main_vid" ng-controller="pointController" class="container" >
     <h1 id="h1_title">
         Find Your Next Location
@@ -10,15 +11,17 @@
     <input type="submit" id="submit" ng-click="sort()" value="show category" />
     <input type="submit" id="submit1" ng-click="sortByRank()" value="sort by rank" />
     </div>
-    <div id="points_div"  >
-        <div class="image_class" id = "aaaa" mg-model = "container.show" ng-bind-html="points_arr" ng-repeat="point in points_arr">
+    <div id="points_div" ng-bind-html="points_arr" ng-repeat="(key, value) in points_arr | groupBy: 'category'" >
+        <div id="byCategoryGroup">
+        <h1 id="titleCategory">{{key}}</h1>
+        <div class="image_class" id = "aaaa" mg-model = "container.show" ng-repeat="point in value">
             <div id ="aaaa1"  >
                 <h3 id="abc" class="name_user_h3">{{point.name}}</h3>
                 <img  id="{{point.id}}" ng-src={{point.star}} ng-click="imgStar($event)" width="60px" height="60px"></img>
             </div>
-            <img id="{{point.id}}" class="image_id" ng-src="{{point.picture}}" data-ng-click="clickMe(IsDisplay,$event,point.name)" height="280" width="320"></img>
-            
+            <img id="{{point.id}}" class="image_id" ng-src="{{point.picture}}" data-ng-click="clickMe(IsDisplay,$event,point.name)" height="280" width="320"></img> 
             <!-- <input type="submit" id="fav" ng-click="" value="Add to your favorites" /> -->
+        </div>
         </div>
     </div>
     <div id="myModal" ng-show="IsDisplay" class="modal">
