@@ -15,6 +15,10 @@ body {
     background-color: antiquewhite;
 }
 
+#sortBy{
+  margin-left: 2%;
+}
+
 #name_user_h3{
     text-align: center;
     font-size: 25px;
