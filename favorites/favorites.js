@@ -81,23 +81,7 @@ angular.module("myApp")
 
         
         $scope.clickMe = function(clicked,event,poiName){
-            var url1 = "http://localhost:3000/getPoints/"+poiName;
-            $http({
-                method : "GET",
-                url : url1,
-                headers: {
-                    "Authorization":token_scope,
-                }
-              }).then(function mySuccess(response) {
-                  $scope.categories = response.data;
-                  var a1 = {
-                      id:"5",
-                      category:"all"
-                  };
-                  $scope.categories.push(a1);
-                }, function myError(response) {
-                  $scope.myWelcome = response.statusText;
-            });
+           
             if(modal.style.display = "none")
                 modal.style.display = "block";
             else
@@ -105,18 +89,16 @@ angular.module("myApp")
             $scope.idshow = event.target.id;
             $scope.IsDisplay = clicked == true ? false : true;
             /* modal setting picture */
-            for (let index = 0; index < ($scope.points_arr).length; index++) {
-                    if($scope.points_arr[index].name == poiName){
-                        $scope.showPoint = $scope.points_arr[index];
-                        $scope.pointInfo = points[index];
-                        $scope.recentReview = JSON.parse(points[index].recent_reviews);
-                        var tmp = "";
-                        for(let in1 = 0; in1 < ($scope.recentReview).length;in1++){
-                            tmp = tmp + ($scope.recentReview)[in1].review + " " + ($scope.recentReview)[in1].date+"  " ;
-                        } 
-                        $scope.recentReview= tmp;
-                    }
-            }
+            var index_of_oldArr =  points.findIndex(obj => obj.name==[poiName]);
+            var index_of_newArr =  $scope.points_arr.findIndex(obj => obj.name==[poiName]);
+            $scope.showPoint = $scope.points_arr[index_of_newArr];
+            $scope.pointInfo = points[index_of_oldArr];
+            $scope.recentReview = JSON.parse(points[index_of_oldArr].recent_reviews);
+            var tmp = "";
+            for(let in1 = 0; in1 < ($scope.recentReview).length;in1++){
+                tmp = tmp + ($scope.recentReview)[in1].review + " " + ($scope.recentReview)[in1].date+"  " ;
+            } 
+            $scope.recentReview= tmp;
         };
         $scope.saveReview = function(){
             var rev = $scope.review_rank.reviewText;
@@ -207,4 +189,46 @@ angular.module("myApp")
         span.onclick = function() {
             modal.style.display = "none";
         };
+
+        $scope.dragAndDrop = function(point_name){
+            try{
+                var t_id = event.target.id;
+                var id_number = $scope.points_arr.findIndex(obj => obj.name==[point_name]);
+                if(t_id == "submitLeft"){
+                    if(id_number != 0 ){
+                        var b = $scope.points_arr[id_number];
+                        $scope.points_arr[id_number] = $scope.points_arr[id_number-1];
+                        $scope.points_arr[id_number-1] = b;
+                    }
+                }
+                else{
+                    if(id_number != $scope.points_arr.length-1 ){
+                        var b = $scope.points_arr[id_number];
+                        $scope.points_arr[id_number] = $scope.points_arr[id_number+1];
+                        $scope.points_arr[id_number+1] = b;
+                    }
+                }
+                var category_arr_to_save = new Array();
+                for (let index = 0; index < $scope.points_arr.length; index++) {
+                    category_arr_to_save.push($scope.points_arr[index].name);
+                }
+                $http({
+                    method : "POST",
+                    url : "http://localhost:3000/saveArrOfPointOfInterest",
+                    data: {
+                            username: $rootScope.currentuser.toString() ,
+                            pointsNames: category_arr_to_save
+                    },
+                    headers: {
+                        "Authorization":token_scope,
+                    }
+                }).then(function mySuccess(response) {
+                    }, function myError(response) {
+                    $scope.myWelcome = response.statusText;
+                });
+            }catch(err){
+                return;
+            }
+            
+        }
 });

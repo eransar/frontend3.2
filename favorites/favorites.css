@@ -27,6 +27,14 @@ body {
     background-color: black;
 }
 
+#submitLeft{
+  margin: 4%;
+}
+
+#submitRight{
+  margin: 4%;
+}
+
 #image_id{
     margin: 20px;
 }
