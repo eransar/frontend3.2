@@ -148,7 +148,7 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
                 }, function myError(response) {
                     $scope.loginerror = response.data;
                     if($scope.loginerror == null){
-                        alert("Server is not responding")
+                        alert("Server is not responding");
                     }
                     alert($scope.loginerror);
                 });
