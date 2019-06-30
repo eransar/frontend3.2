@@ -5,12 +5,14 @@ angular.module("myApp")
         $scope.fav_img = "star1.png";
         var dict = new Object();
         var tmpCategory = "";
+        $scope.points2 =new Array();
+        $scope.categories=new Array();
         var modal = document.getElementById("myModal");
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
         var points = localStorage.getItem("points");
         points =  JSON.parse(points);
-
+        var token = $cookies.get($rootScope.currentuser.toString());
         function compareStrings(a, b) {
             // Assuming you want case-insensitive comparison
             a = a.toLowerCase();
@@ -45,32 +47,33 @@ angular.module("myApp")
             a.name = points[index1].name;
             a.picture = "http://127.0.0.1:3000/images/"+points[index1].picture;
             a.id = index1;
-            a.star ="images/star1.png"
+            if(!($rootScope.currentuser.toString()=="Guest"))
+                a.star ="images/star1.png"
             a.category = points[index1].category;
             $scope.points_arr.push(a);
         }
-        var token = $cookies.get($rootScope.currentuser.toString());
-        
-        $http({
-            method : "GET",
-            url : "http://localhost:3000/getInterest",
-            headers: {
-            "Authorization":token
-            }
-          }).then(function mySuccess(response) {
-              $scope.points2 = response.data;
-              for (let index1 = 0; index1 <  points.length; index1++) {
-                if($scope.points2.includes($scope.points_arr[index1].name)){
-                    $scope.points_arr[index1].star = "images/star.png"
+        if(!($rootScope.currentuser.toString()=="Guest")){
+            $http({
+                method : "GET",
+                url : "http://localhost:3000/getInterest",
+                headers: {
+                "Authorization":token
                 }
-                else{
-                    $scope.points_arr[index1].star ="images/star1.png"
+            }).then(function mySuccess(response) {
+                $scope.points2 = response.data;
+                for (let index1 = 0; index1 <  points.length; index1++) {
+                    if($scope.points2.includes($scope.points_arr[index1].name)){
+                        $scope.points_arr[index1].star = "images/star.png"
+                    }
+                    else{
+                        $scope.points_arr[index1].star ="images/star1.png"
 
+                    }
                 }
-            }
-            }, function myError(response) {
-              $scope.myWelcome = response.statusText;
-        });
+                }, function myError(response) {
+                $scope.myWelcome = response.statusText;
+            });
+        }
 
         $scope.sort = function(){
             tmpCategory = $scope.container.category.category;
@@ -85,10 +88,8 @@ angular.module("myApp")
                     $scope.points_arr.push(a);
                 }
             }
-            if($rootScope.currentuser.toString()=="Guest"){
-                for (let index1 = 0; index1 <  points.length; index1++)
-                    $scope.points_arr[index1].star = "images/star1.png"            }
-            else{
+            
+            if(!($rootScope.currentuser.toString()=="Guest")){
                 $http({
                     method : "GET",
                     url : "http://localhost:3000/getInterest",
@@ -119,20 +120,6 @@ angular.module("myApp")
         $scope.recentReview = "";
 
         $scope.clickMe = function(clicked,event,poiName){
-            var url1 = "http://localhost:3000/getPoints/"+poiName;
-            $http({
-                method : "GET",
-                url : url1
-              }).then(function mySuccess(response) {
-                  $scope.categories = response.data;
-                  var a1 = {
-                      id:"5",
-                      category:"all"
-                  };
-                  $scope.categories.push(a1);
-                }, function myError(response) {
-                  $scope.myWelcome = response.statusText;
-            });
             if(modal.style.display = "none")
                 modal.style.display = "block";
             else
@@ -141,18 +128,17 @@ angular.module("myApp")
             $scope.idshow = event.target.id;
             $scope.IsDisplay = clicked == true ? false : true;
             /* modal setting picture */
-            for (let index = 0; index < ($scope.points_arr).length; index++) {
-                    if($scope.points_arr[index].name == poiName){
-                        $scope.showPoint = $scope.points_arr[index];
-                        $scope.pointInfo = points[index];
-                        $scope.recentReview = JSON.parse(points[index].recent_reviews);
-                        var tmp = "";
-                        for(let in1 = 0; in1 < ($scope.recentReview).length;in1++){
-                            tmp = tmp + ($scope.recentReview)[in1].review + " " + ($scope.recentReview)[in1].date+"  " ;
-                        } 
-                        $scope.recentReview= tmp;
-                    }
-            }
+
+            var index_of_oldArr =  points.findIndex(obj => obj.name==[poiName]);
+            var index_of_newArr =  $scope.points_arr.findIndex(obj => obj.name==[poiName]);
+            $scope.showPoint = $scope.points_arr[index_of_newArr];
+            $scope.pointInfo = points[index_of_oldArr];
+            $scope.recentReview = JSON.parse(points[index_of_oldArr].recent_reviews);
+            var tmp = "";
+            for(let in1 = 0; in1 < ($scope.recentReview).length;in1++){
+                tmp = tmp + ($scope.recentReview)[in1].review + " " + ($scope.recentReview)[in1].date+"  " ;
+            } 
+            $scope.recentReview= tmp;  
         };
 
         $scope.sortByRank = function(){
@@ -171,10 +157,7 @@ angular.module("myApp")
                     $scope.points_arr.push(a);
                 }
             }
-            if($rootScope.currentuser.toString()=="Guest"){
-                for (let index1 = 0; index1 <  points.length; index1++)
-                    $scope.points_arr[index1].star = "images/star1.png"            }
-            else{
+            if(!($rootScope.currentuser.toString()=="Guest")){
                 $http({
                     method : "GET",
                     url : "http://localhost:3000/getInterest",

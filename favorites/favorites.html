@@ -14,11 +14,12 @@
     <div id="points_div"  >
         <div class="image_class" id = "aaaa" mg-model = "container.show" ng-bind-html="points_arr" ng-repeat="point in points_arr">
             <div id ="aaaa1">
+                    <input type="submit" id="submitLeft"  data-ng-click="dragAndDrop(point.name)" value="Left" />
+                    <input type="submit" id="submitRight" data-ng-click="dragAndDrop(point.name)" value="Right" />
                 <h3 id="abc" class="name_user_h3">{{point.name}}</h3>
                 <img id="{{point.id}}" src="/images/star.png" ng-click="imgStar($event)" width="60px" height="60px"></img>
             </div>
             <img id="{{point.id}}" class="image_id" ng-src="{{point.picture}}" data-ng-click="clickMe(IsDisplay,$event,point.name)" height="280" width="320"></img>
-            
             <!-- <input type="submit" id="fav" ng-click="" value="Add to your favorites" /> -->
         </div>
     </div>
