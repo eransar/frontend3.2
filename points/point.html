@@ -23,13 +23,12 @@
         </form>
     </div>
     <div id="sortBy">
-    <select  name="category" id="category" ng-bind-html="categories" ng-model="container.category" ng-options="c.category for c in categories" >
-        </select><br><br>
-    <input type="submit" id="submit" ng-click="sort()" value="show category" />
-    <input type="submit" id="submit1" ng-click="sortByRank()" value="sort by rank" />
-    <div>
-        <p ng-show="userconnected" ng-bind-html="points2" >Number Of Favorites {{points2.length}}</p>
-    </div>
+        <select  name="category" id="category" ng-bind-html="categories" ng-model="container.category" ng-options="c.category for c in categories" ></select><br><br>
+        <input type="submit" id="submit" ng-click="sort()" value="show category" />
+        <input type="submit" id="submit1" ng-click="sortByRank()" value="sort by rank" />
+        <div>
+            <p ng-show="userconnected" ng-bind-html="points2" >Number Of Favorites {{points2.length}}</p>
+        </div>
     </div>
     <div id="points_div" ng-bind-html="points_arr" ng-repeat="(key, value) in points_arr | groupBy: 'category'" >
         <div id="byCategoryGroup">

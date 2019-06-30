@@ -40,16 +40,15 @@ angular.module("myApp")
             }
           }).then(function mySuccess(response) {
               var points2 = response.data;
-              for (let index1 = 0; index1 < points1.length; index1++) {
-                if(points2.includes(points1[index1].name)){
-                    var a = new Object();
-                    a.name = points1[index1].name;
-                    a.picture = "http://127.0.0.1:3000/images/"+points1[index1].picture;
-                    a.id = index1;
-                    a.category = points1[index1].category;
-                    a.total_rank = points1[index1].total_rank;
-                    $scope.points_arr.push(a);
-                }
+              for (let index = 0; index < points2.length; index++) {
+                var index_of_fav =  points1.findIndex(obj => obj.name==[points2[index]]);
+                var a = new Object();
+                a.name = points1[index_of_fav].name;
+                a.picture = "http://127.0.0.1:3000/images/"+points1[index_of_fav].picture;
+                a.id = index_of_fav;
+                a.category = points1[index_of_fav].category;
+                a.total_rank = points1[index_of_fav].total_rank;
+                $scope.points_arr.push(a);
             }
             tempPoints = $scope.points_arr;
             }, function myError(response) {
@@ -135,8 +134,9 @@ angular.module("myApp")
             }            
         }
 
-        $scope.imgStar = function(event){
-            var t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
+        $scope.imgStar = function(name){
+            // var t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
+            var t = name;
             $http({
                 method : "DELETE",
                 url : "http://localhost:3000/deletePointOfInterest",
@@ -144,7 +144,7 @@ angular.module("myApp")
                         user_name :{
                             username:$rootScope.currentuser
                         } ,
-                        point_name : t
+                        point_name : name
                 },
                 headers: {
                     'Content-Type':"application/json;charset=utf-8",
@@ -214,7 +214,7 @@ angular.module("myApp")
                 }
                 $http({
                     method : "POST",
-                    url : "http://localhost:3000/saveArrOfPointOfInterest",
+                    url : "http://localhost:3000/newOrderOfInterest",
                     data: {
                             username: $rootScope.currentuser.toString() ,
                             pointsNames: category_arr_to_save
