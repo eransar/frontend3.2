@@ -255,7 +255,8 @@ angular.module("myApp")
         $scope.imgStar = function(event){
             var token = $cookies.get($rootScope.currentuser.toString());
             var t_id = document.getElementById(event.target.id);
-            var r =document.getElementById(event.target.id).parentElement.childNodes[3].currentSrc.split("/")[4];
+            var lastindex = document.getElementById(event.target.id).parentElement.childNodes[3].currentSrc.lastIndexOf("/")+1;
+            var r = document.getElementById(event.target.id).parentElement.childNodes[3].currentSrc.substr(lastindex);
             var t = document.getElementById(event.target.id).parentElement.childNodes[1].childNodes[0].data;
             if(r == "star1.png"){
                 var arr_poiint_to_send = new Array();

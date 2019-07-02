@@ -64,8 +64,11 @@ angular.module("myApp")
                 dict["img4"] = $scope.images[1];
             }
             catch(e){
-                $scope.interest_image1="images/notfound.png";
-                $scope.interest_image2="images/notfound.png";
+                if($scope.interest_image1!=null){
+                    $scope.interest_image2="images/notfound.png";
+                }
+                // $scope.interest_image1="images/notfound.png";
+
             }
 
             // $scope.image1="http://127.0.0.1:3000/images/"+$scope.images[0].picture;
