@@ -135,10 +135,21 @@ angular.module("myApp")
             $scope.pointInfo = points[index_of_oldArr];
             $scope.recentReview = JSON.parse(points[index_of_oldArr].recent_reviews);
             var tmp = "";
-            for(let in1 = 0; in1 < ($scope.recentReview).length;in1++){
-                tmp = tmp + ($scope.recentReview)[in1].review + " " + ($scope.recentReview)[in1].date+"  " ;
-            } 
-            $scope.recentReview= tmp;  
+            if(($scope.recentReview)!=null){
+                for(let in1 = 0; in1 < ($scope.recentReview).length;in1++){
+                    tmp = tmp + ($scope.recentReview)[in1].review + " " + ($scope.recentReview)[in1].date+"  " ;
+                } 
+            }
+            $scope.recentReview= tmp;
+            var L = window.L;
+            var mymap = L.map('mapid').setView([31.776906, 35.234852], 13);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiaWRhbjEyMzQiLCJhIjoiY2p4a3J4d3NlMDR3dzN6cWJiOGU3N2wyZiJ9.owHBeZT-sGp9zPLVf6vKiA'
+            }).addTo(mymap);
+            var marker = L.marker([31.776906, 35.234852]).addTo(mymap);
         };
 
 
