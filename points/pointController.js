@@ -309,6 +309,7 @@ angular.module("myApp")
                             point_name: t
                     },
                     headers: {
+                        "Content-Type": "application/json;charset=utf-8",
                         "Authorization":token,
                     }
                   }).then(function mySuccess(response) {

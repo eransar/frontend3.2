@@ -54,19 +54,9 @@ angular.module("myApp").controller("homeController", function ($scope,$http,$loc
 
 
         $scope.IsRestore = clicked == true ? false : true;
-    }
+    };
 
-    $http({
-        method : "GET",
-        url : "http://localhost:3000/questions"
-    }).then(function mySuccess(response) {
-        $scope.questions = response.data;
-        $scope.image1="http://127.0.0.1:3000/images/"+$scope.images[0].picture;
-        $scope.image2="http://127.0.0.1:3000/images/"+$scope.images[1].picture;
-        $scope.image3="http://127.0.0.1:3000/images/"+$scope.images[2].picture;
-    }, function myError(response) {
-        $scope.myWelcome = response.statusText;
-    });
+
 
 
 

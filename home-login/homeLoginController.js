@@ -49,15 +49,24 @@ angular.module("myApp")
             url : "http://localhost:3000/getRecentSavedPointsOfInterest"
 
         }).then(function mySuccess(response) {
-
+            $scope.images = response.data;
             try{
-                $scope.images = response.data;
 
-                $scope.interest_image1="http://127.0.0.1:3000/images/"+$scope.images[0].picture;
-                $scope.interest_image2="http://127.0.0.1:3000/images/"+$scope.images[1].picture;
 
-                if($scope.images[0].picture===null){
-                    $scope.interest_image1="invalid_link";
+                switch($scope.images.length){
+                    case 0:
+                        $scope.interest_image1="images/notfound.png";
+                        break;
+                    case 1:
+                        $scope.interest_image1="http://127.0.0.1:3000/images/"+$scope.images[0].picture;
+                        $scope.interest_image2="images/notfound.png";
+
+                        break;
+                    case 2:
+                        $scope.interest_image1="http://127.0.0.1:3000/images/"+$scope.images[0].picture;
+                        $scope.interest_image2="http://127.0.0.1:3000/images/"+$scope.images[1].picture;
+
+                        break;
                 }
 
                 dict["img3"] = $scope.images[0];
@@ -114,10 +123,10 @@ angular.module("myApp")
             modal.style.display = "none";
         };
 
-        $scope.myFunction = function(event) {
-            event.src = "/images/icon.png";
-            event.onerror = '';
-        };
+        // $scope.myFunction = function(event) {
+        //     event.src = "/images/icon.png";
+        //     event.onerror = '';
+        // };
 
 
 
