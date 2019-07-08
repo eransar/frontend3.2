@@ -287,6 +287,7 @@ angular.module("myApp")
                     }
                     if(bool1){
                         arr_poiint_to_send.push(t);
+                        $scope.points2.push(t);
                         $http({
                             method : "POST",
                             url : "http://localhost:3000/saveArrOfPointOfInterest",
@@ -312,6 +313,7 @@ angular.module("myApp")
                 
             }
             else{
+                $scope.points2.pop(t);
                 $http({
                     method : "DELETE",
                     url : "http://localhost:3000/deletePointOfInterest",
